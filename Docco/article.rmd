@@ -1,0 +1,45 @@
+---
+title: "GRUB: Genetic Refined Under Boosting"
+date: "`r Sys.Date()`"
+author: WildBoar
+bibliography: article.bib
+csl: ieee.csl
+link-citations: true
+output:
+    rmdformats::readthedown:
+    toc: 2
+    highlight: tango
+    mathjax: default
+    number_sections: false
+    fig_caption: true
+---
+
+## Introduction ##
+
+This project focuses on _automatic feature discovery_ for image processing. In the past five years, _machine vision_ has taken a significant step forward because of the rise of the GPU, coupled with early ideas [@lecun1989backpropagation] around machine learning with convolutional filters. The current Convolutional Neural Networks (CNN) have generated impressive results. However, the main _drawback_ of the approach is that the models are essentially black boxes (the internals are obfuscated, meaning that they can only be verified by looking at inputs and outputs). This means they are hard to fix, validate, learn from, or reuse.
+
+The **goal** of this project is to investigate convolution as a tool for feature extraction in a way that makes it far more accessible to an engineer trying to understand the inner workings of such a system. 
+
+### Research Strategy ###
+
+The are several ideas that I am proposing for this research project:
+
+* _Convolutional filtering_ in _signal processing_ is an established topic with several commonly used intuitions. I want to try and link some of these instincts to see if that gives me a better understanding of the topic.
+* CNNs generate a set of _random_ convolution filters and then attempt to refine them with backpropagation-based gradient descent. I want to separate this process into sound filter generation (which I will use genetic learning for) and refinement (which I will experiment with various refinement strategies for).
+* Neural Networks are a powerful tool for learning functions. However, they encode models that are hard for humans to understand. I intend to replace the neural networks in the system with something more human-understandable - which is currently hypothesized as boosting.
+
+## Literature ##
+
+## Methodology ##
+
+## Experiment ##
+
+## Result ##
+
+## Conclusion ##
+
+## Future Work ##
+
+## References ##
+
+<div id="refs"></div>
