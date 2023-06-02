@@ -1,0 +1,49 @@
+---
+title: "Experiment 1: Simple Shape Detection"
+date: "`r Sys.Date()`"
+author: WildBoar
+bibliography: article.bib
+csl: ieee.csl
+link-citations: true
+output:
+    rmdformats::readthedown:
+    toc: 2
+    highlight: tango
+    mathjax: default
+    number_sections: false
+    fig_caption: true
+---
+
+## Introduction ##
+
+### What ###
+
+Convolutional filters and correlation have a symmetrical relationship mathematically. Therefore I hypothesize that an image of even-sized and spaced shapes of different types can be correctly classified using convolution. I also hypothesize that the filters will appear to have similar patterns as the matching shapes. Finally, I hypothesize that adding rotation to the conditions will generate exciting ways in the convolution filter.  
+
+### Why ###
+
+The primary purposes of this experiment are the following:
+
+* I want to verify that I can use _Genetic Algorithms_ (GA) to generate useful convolutional filters.
+* I want to verify my intuition about convolutional filters.
+* I want to experiment with convolutional filter refinement.
+
+
+### How ###
+
+
+## Literature ##
+
+## Methodology ##
+
+## Experiment ##
+
+## Result ##
+
+## Conclusion ##
+
+## Future Work ##
+
+## References ##
+
+<div id="refs"></div>
