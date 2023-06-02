@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<class>
+
+<namespace>NVL_App</namespace>
+<solution>GeneticLib</solution>
+<name>Solution</name>
+<description>A solution in the genetic context</description>
+
+<includes>
+    <include name="vector" namespace="std" local="false" />
+    <include name="iostream" namespace="std" local="false" />
+</includes>
+
+<variables>
+    <variable type="int" name="id" code="10" />
+    <variable type="vector<int>" name="dna" code="10" />
+    <variable type="double" name="score" code="11" />
+</variables>
+
+<constructors>
+
+    <!-- The main constructor -->
+    <constructor type="custom" inline="true">
+        <parameter type="int" name="id" description="The identifier for the solution" />
+        <parameter type="vector<int>&" name="dna" description="The dna-string representing this solution" />
+    </constructor>
+
+</constructors>
+
+</class>

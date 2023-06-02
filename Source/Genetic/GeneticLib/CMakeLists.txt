@@ -6,10 +6,10 @@
 # Date Created: 2023-06-02
 #--------------------------------------------------------
 
-# Setup include directories
+# Setup includes directories
 include_directories("../" "${LIBRARY_BASE}/NVLib")
 
 # Create Library
-add_library(GeneticLib STATIC
-    ArgUtils.cpp
+add_library (GeneticLib STATIC
+	ArgUtils.cpp
 )
