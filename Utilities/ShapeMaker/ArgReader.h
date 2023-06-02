@@ -1,5 +1,5 @@
 //--------------------------------------------------
-// A helper module for dealing with incomming arguments
+// A helper module for dealing with incoming arguments
 //
 // @author: Wild Boar
 //
@@ -42,10 +42,10 @@ namespace NVL_Utils
 
             auto parameters = new NVLib::Parameters();
 
-            parameters->Add("input", parser.get<String>("input"));
-            parameters->Add("output", parser.get<String>("output"));
-            parameters->Add("filename", parser.get<String>("filename"));
-            parameters->Add("count", parser.get<String>("count"));
+            parameters->Add("block_size", parser.get<String>("block_size"));
+            parameters->Add("w_count", parser.get<String>("w_count"));
+            parameters->Add("h_count", parser.get<String>("h_count"));
+            parameters->Add("use_rot", parser.get<String>("use_rot"));
 
             return parameters;
         }        
@@ -114,11 +114,11 @@ namespace NVL_Utils
         inline static string GetParamKeys() 
         {
             const char * keys = 
-                "{ help h usage ? |                       | Show help message                            }"
-                "{ input          | Input                 | The folder containing the input files        }"
-                "{ output         | Output                | The folder containing the output files       }"
-                "{ filename       | card                  | Image template name --> [@fileName]_<id>.png }"
-                "{ count          | 3                     | The location of the output folder            }"; 
+                "{ help h usage ? |                         | Show help message                            }"
+                "{ block_size     | 20                      | The folder containing the input files        }"
+                "{ w_count        | 25                      | The folder containing the output files       }"
+                "{ h_count        | 50                      | Image template name --> [@fileName]_<id>.png }"
+                "{ use_rot        | 0                       | The location of the output folder            }"; 
 
             return string(keys);
         }
