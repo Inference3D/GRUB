@@ -27,12 +27,14 @@ The primary purposes of this experiment are the following:
 * I want to verify that I can use _Genetic Algorithms_ (GA) to generate useful convolutional filters.
 * I want to verify my intuition about convolutional filters.
 * I want to experiment with convolutional filter refinement.
-
+* I am interested to see what happens when dealing with rotation.
 
 ### How ###
 
+I aim to create a _generic_ GA that can compute using sequences of integers (which I am calling **DNA** sequences). I aim to specialize this algorithm to real problems by writing wrappers capable of mapping DNA sequences to solution formulations that make sense to the issue. Using genetic algorithms to create filters is an old idea [@etter1982recursive]. However, I plan to reprise the approach in this work to generate convolution filters.
 
-## Literature ##
+Once I have used my generic algorithm to generate filters that give acceptable performance, my next idea is to experiment with various approaches to refine these algorithms using gradient descent approaches. I am particularly interested in comparing _traditional gradient descent_ with random refinement approaches and Adam [@kingma2014adam].
+
 
 ## Methodology ##
 
