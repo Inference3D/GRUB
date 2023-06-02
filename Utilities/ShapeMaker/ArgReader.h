@@ -115,9 +115,9 @@ namespace NVL_Utils
         {
             const char * keys = 
                 "{ help h usage ? |                         | Show help message                            }"
-                "{ block_size     | 20                      | The folder containing the input files        }"
-                "{ w_count        | 25                      | The folder containing the output files       }"
-                "{ h_count        | 50                      | Image template name --> [@fileName]_<id>.png }"
+                "{ block_size     | 100                      | The folder containing the input files        }"
+                "{ w_count        | 5                      | The folder containing the output files       }"
+                "{ h_count        | 6                      | Image template name --> [@fileName]_<id>.png }"
                 "{ use_rot        | 0                       | The location of the output folder            }"; 
 
             return string(keys);

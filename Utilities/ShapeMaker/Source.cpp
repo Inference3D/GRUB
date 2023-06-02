@@ -6,6 +6,7 @@
 // @date: 2023-06-02
 //--------------------------------------------------
 
+#include <fstream>
 #include <iostream>
 using namespace std;
 
@@ -21,6 +22,9 @@ using namespace cv;
 // Function Prototypes
 //--------------------------------------------------
 void Run(NVLib::Parameters * parameters);
+void RenderTriangle(Mat& image, int blockSize, int wx, int wh);
+void RenderCircle(Mat& image, int blockSize, int wx, int wh);
+void RenderSquare(Mat& image, int blockSize, int wx, int wh);
 
 //--------------------------------------------------
 // Execution Logic
@@ -46,10 +50,118 @@ void Run(NVLib::Parameters * parameters)
     logger.Log(1, "Generate a base image");
     Mat image = Mat_<Vec3b>(blockSize * hCount, blockSize * wCount); image.setTo(Vec3b(255, 255, 255));
 
+    logger.Log(1, "Creating a truth map");
+    auto truthMap = vector<Point>();
+
+    logger.Log(1, "Generating shapes");
+    for (auto row = 0; row < hCount; row++) 
+    {
+        for (auto column = 0; column < wCount; column++) 
+        {
+            auto selection = rand() % 3;
+
+            if (selection == 0) { RenderTriangle(image, blockSize, column, row); truthMap.push_back(Point(column, row)); }
+            else if (selection == 1) RenderCircle(image, blockSize, column, row);
+            else RenderSquare(image, blockSize, column, row);
+        }
+    }
+
     logger.Log(1, "Saving the result to disk");
     imwrite("result.png", image);
 
+    logger.Log(1, "Saving the truth map");
+    auto writer = ofstream("truthmap.txt");
+    for (auto& point : truthMap) writer << point.x << "," << point.y << endl;
+    writer.close();
+
     logger.StartApplication();
+}
+
+//--------------------------------------------------
+// Render Shapes
+//--------------------------------------------------
+
+/**
+ * @brief Render a triangle
+ * @param image The image that we are dealing with
+ * @param blockSize The size of the block
+ * @param wx The block width coordinate
+ * @param wh The block height coordinate
+ */
+void RenderTriangle(Mat& image, int blockSize, int wx, int wh) 
+{
+    // Determine the buffer
+    auto buffer = round(blockSize * 0.3);
+
+    // Top Left location
+    auto topX = wx * blockSize; auto topY = wh * blockSize;
+
+    // Create a vector for points
+    auto points = vector<Point>();
+
+    // Point 1
+    auto x1 = buffer + topX; auto y1 = (blockSize - buffer) + topY;
+    points.push_back(Point(x1, y1));
+
+    // Point 2
+    auto x2 = (blockSize - buffer) + topX; auto y2 = (blockSize - buffer) + topY;
+    points.push_back(Point(x2, y2));
+
+    // Point 3
+    auto x3 = (blockSize - 2 * buffer) * 0.5 + buffer + topX; auto y3 = buffer + topY;
+    points.push_back(Point(x3, y3));
+
+    // Render
+    auto pp = vector< vector<Point> > { points };
+    drawContours(image, pp, 0, Scalar(), FILLED);
+}
+
+/*
+ * Add the logic to render  a circle
+ * @param image The image that we are dealing with
+ * @param blockSize The size of the block
+ * @param wx The block width coordinate
+ * @param wh The block height coordinate
+ */
+void RenderCircle(Mat& image, int blockSize, int wx, int wh) 
+{
+    // Determine the buffer
+    auto buffer = round(blockSize * 0.3);
+
+    // Top Left location
+    auto topX = wx * blockSize; auto topY = wh * blockSize;
+
+    // Find the radius
+    auto radius = (blockSize - 2 * buffer) * 0.5;
+
+    // Center
+    auto cx = topX + radius + buffer;
+    auto cy = topY + radius + buffer;
+
+    // Render the circle
+    circle(image, Point(cx, cy), radius, Scalar(), FILLED); 
+}
+
+/**
+ * @brief Add the logic for rendering a square
+ * @param image The image that we are rendering
+ * @param blockSize The size of the block
+ * @param wx The block x index
+ * @param wh The block y index
+ */
+void RenderSquare(Mat& image, int blockSize, int wx, int wh) 
+{
+     // Determine the buffer
+    auto buffer = round(blockSize * 0.3);
+
+    // Top Left location
+    auto topX = wx * blockSize + buffer; auto topY = wh * blockSize + buffer;
+
+    // Find the radius
+    auto length = (blockSize - buffer * 2);
+
+    // Render the circle
+    rectangle(image, Rect(Point(topX, topY), Size(length, length)), Scalar(), FILLED);
 }
 
 //--------------------------------------------------
