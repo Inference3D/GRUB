@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<class>
+
+<namespace>NVL_App</namespace>
+<solution>GeneticLib</solution>
+<name>GeneticParameters</name>
+<description>The parameters that we are dealing with</description>
+
+<includes>
+    <include name="iostream" namespace="std" local="false" />
+</includes>
+
+<variables>
+    <variable type="int" name="populationSize" code="10" />
+    <variable type="int" name="tournamentSize" code="10" />
+    <variable type="double" name="mutationProbability" code="10" />
+    <variable type="int" name="eliteCount" code="10" />
+</variables>
+
+<constructors>
+    <constructor type="auto" inline="true" />
+</constructors>
+
+</class>
