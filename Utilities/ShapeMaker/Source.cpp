@@ -39,9 +39,15 @@ void Run(NVLib::Parameters * parameters)
 
     logger.Log(1, "Retrieve input arguments for the application");
     auto blockSize = NVL_Utils::ArgReader::ReadInteger(parameters, "block_size");
-    auto wCount = NVL_Utils::ArgReader::ReadString(parameters, "w_count");
-    auto hCount = NVL_Utils::ArgReader::ReadString(parameters, "h_count");
+    auto wCount = NVL_Utils::ArgReader::ReadInteger(parameters, "w_count");
+    auto hCount = NVL_Utils::ArgReader::ReadInteger(parameters, "h_count");
     auto useRotation = NVL_Utils::ArgReader::ReadInteger(parameters, "use_rot");
+
+    logger.Log(1, "Generate a base image");
+    Mat image = Mat_<Vec3b>(blockSize * hCount, blockSize * wCount); image.setTo(Vec3b(255, 255, 255));
+
+    logger.Log(1, "Saving the result to disk");
+    imwrite("result.png", image);
 
     logger.StartApplication();
 }

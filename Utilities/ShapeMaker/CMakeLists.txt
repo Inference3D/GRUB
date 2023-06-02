@@ -33,9 +33,3 @@ add_executable(ShapeMaker
 
 # Add link libraries                               
 target_link_libraries(ShapeMaker NVLib ${OpenCV_LIBS} )
-
-# Copy Resources across
-add_custom_target(resource_copy ALL
-	COMMAND cmake -E copy_directory ${CMAKE_SOURCE_DIR}/Resources ${CMAKE_BINARY_DIR}
-    DEPENDS ${MY_TARGET}
-)
