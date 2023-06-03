@@ -11,6 +11,7 @@ include_directories("../" "${LIBRARY_BASE}/NVLib")
 
 # Create Library
 add_library (GeneticLib STATIC
+	Tools/PathHelper.cpp
 	ArgUtils.cpp
 	Population.cpp
 )
