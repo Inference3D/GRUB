@@ -47,32 +47,45 @@ void Run(NVLib::Parameters * parameters)
     auto hCount = NVL_Utils::ArgReader::ReadInteger(parameters, "h_count");
     auto useRotation = NVL_Utils::ArgReader::ReadInteger(parameters, "use_rot");
 
-    logger.Log(1, "Generate a base image");
-    Mat image = Mat_<Vec3b>(blockSize * hCount, blockSize * wCount); image.setTo(Vec3b(255, 255, 255));
+    // logger.Log(1, "Generate a base image");
+    // Mat image = Mat_<Vec3b>(blockSize * hCount, blockSize * wCount); image.setTo(Vec3b(255, 255, 255));
 
-    logger.Log(1, "Creating a truth map");
-    auto truthMap = vector<Point>();
+    // logger.Log(1, "Creating a truth map");
+    // auto truthMap = vector<Point>();
 
-    logger.Log(1, "Generating shapes");
-    for (auto row = 0; row < hCount; row++) 
-    {
-        for (auto column = 0; column < wCount; column++) 
-        {
-            auto selection = rand() % 3;
+    // logger.Log(1, "Generating shapes");
+    // for (auto row = 0; row < hCount; row++) 
+    // {
+    //     for (auto column = 0; column < wCount; column++) 
+    //     {
+    //         auto selection = rand() % 3;
 
-            if (selection == 0) { RenderTriangle(image, blockSize, column, row); truthMap.push_back(Point(column, row)); }
-            else if (selection == 1) RenderCircle(image, blockSize, column, row);
-            else RenderSquare(image, blockSize, column, row);
-        }
-    }
+    //         if (selection == 0) { RenderTriangle(image, blockSize, column, row); truthMap.push_back(Point(column, row)); }
+    //         else if (selection == 1) RenderCircle(image, blockSize, column, row);
+    //         else RenderSquare(image, blockSize, column, row);
+    //     }
+    // }
 
-    logger.Log(1, "Saving the result to disk");
-    imwrite("result.png", image);
+    // logger.Log(1, "Saving the result to disk");
+    // imwrite("result.png", image);
 
-    logger.Log(1, "Saving the truth map");
-    auto writer = ofstream("truthmap.txt");
-    for (auto& point : truthMap) writer << point.x << "," << point.y << endl;
-    writer.close();
+    // logger.Log(1, "Saving the truth map");
+    // auto writer = ofstream("truthmap.txt");
+    // for (auto& point : truthMap) writer << point.x << "," << point.y << endl;
+    // writer.close();
+
+    logger.Log(1, "Creating Triangle");
+    Mat triangle = Mat_<Vec3b>(blockSize, blockSize); triangle.setTo(Vec3b(255, 255, 255)); RenderTriangle(triangle, blockSize, 0, 0);
+    imwrite("image_0000.png", triangle);
+
+    logger.Log(1, "Creating Circle");
+    Mat Circle = Mat_<Vec3b>(blockSize, blockSize); Circle.setTo(Vec3b(255, 255, 255)); RenderCircle(Circle, blockSize, 0, 0);
+    imwrite("image_0001.png", Circle);
+
+    logger.Log(1, "Creating Square");
+    Mat Square = Mat_<Vec3b>(blockSize, blockSize); Square.setTo(Vec3b(255, 255, 255)); RenderSquare(Square, blockSize, 0, 0);
+    imwrite("image_0002.png", Square);
+
 
     logger.StartApplication();
 }
