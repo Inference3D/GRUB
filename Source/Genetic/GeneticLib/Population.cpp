@@ -18,7 +18,7 @@ using namespace NVL_App;
  */
 Population::Population()
 {
-	throw runtime_error("Not implemented");
+	// Extra implementation goes here
 }
 
 /**
@@ -26,7 +26,7 @@ Population::Population()
  */
 Population::~Population()
 {
-	// Add removal logic
+	for (auto solution : _solutions) delete solution;
 }
 
 //--------------------------------------------------
@@ -39,7 +39,7 @@ Population::~Population()
  */
 void Population::AddSolution(Solution * solution)
 {
-	throw runtime_error("Not implemented");
+	_solutions.push_back(solution);
 }
 
 //--------------------------------------------------
@@ -52,7 +52,7 @@ void Population::AddSolution(Solution * solution)
  */
 int Population::GetSolutionCount()
 {
-	throw runtime_error("Not implemented");
+	return (int) _solutions.size();
 }
 
 //--------------------------------------------------
@@ -66,5 +66,26 @@ int Population::GetSolutionCount()
  */
 void Population::GetTopSolutions(int number, vector<Solution *>& result)
 {
-	throw runtime_error("Not implemented");
+	auto bestScore = -1.0; result.clear();
+
+	for (auto solution : _solutions) 
+	{
+		if (result.size() == 0) result.push_back(solution);
+		else 
+		{
+			auto added = false;
+			for (auto i = 0; i < result.size(); i++) 
+			{
+				if (result[i]->GetScore() < solution->GetScore()) 
+				{
+					result.insert(result.begin() + i, solution);
+					added = true;
+					break;
+				}
+			}
+
+			if (result.size() > number) result.erase(result.begin() + (int)(result.size() - 1));
+			else if (result.size() < number) result.push_back(solution);
+		}
+	}
 }
