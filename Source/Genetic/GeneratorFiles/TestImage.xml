@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+
+<class>
+
+<namespace>NVL_Lib</namespace>
+<solution>GeneticLib</solution>
+<name>TestImage</name>
+<description>An image for testing/training the AI</description>
+
+<includes>
+    <include name="iostream" namespace="std" local="false" />
+    <include name="opencv2/opencv.hpp" namespace="cv" local="false" />
+</includes>
+
+<variables>
+    <variable type="int" name="id" code="10" />
+    <variable type="Mat" name="image" code="10" />
+    <variable type="int" name="imageType" code="10" />
+</variables>
+
+<constructors>
+
+    <!-- Main Constructor -->
+    <constructor type="auto" inline="true" />
+
+</constructors>
+
+</class>
