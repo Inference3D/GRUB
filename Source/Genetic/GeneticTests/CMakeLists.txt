@@ -20,9 +20,11 @@ set_target_properties(UnitTestLib PROPERTIES
 )
 
 # Create the executable
-add_executable(GeneticTests
-    Tests/Example_Tests.cpp
+add_executable (GeneticTests
+	Tests/Example_Tests.cpp
+	Tests/Population_Tests.cpp
 )
+
 
 # Add link libraries
 target_link_libraries(GeneticTests GeneticLib NVLib ${OpenCV_LIBS} UnitTestLib GTest::Main)

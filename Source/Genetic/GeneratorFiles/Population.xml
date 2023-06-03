@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+
+<class terminator="true">
+
+<namespace>NVL_App</namespace>
+<solution>GeneticLib</solution>
+<name>Population</name>
+<description>A population that we are testing</description>
+
+<includes>
+    <include name="vector" namespace="std" local="false" />
+    <include name="iostream" namespace="std" local="false" />
+    <include name="Solution.h" local="false" />
+</includes>
+
+<variables>
+    <variable type="vector<Solution *>" name="solutions" code="10" />
+</variables>
+
+<constructors>
+    <constructor type="empty" inline="false" />
+</constructors>
+
+<methods>
+    
+    <!-- Add a solution -->
+    <method section="Add Solutions" access="public" return="void" name="AddSolution" description="Add a solution" inline="false">
+        <parameter type="Solution *" name="solution" description="The solution that we are adding" />
+    </method>   
+
+    <!-- Retrieve a solution count -->
+     <method section="Get Count" access="public" return="int" name="GetSolutionCount" description="Retrieve the count of solutions" inline="false" />
+
+    <!-- Retrieve the top selections -->
+    <method section="Get Top Solution" access="public" return="void" name="GetTopSolution" description="Retrieve the n solutions" inline="false">
+        <parameter type="int" name="number" description="The number of top solutions that we want" />
+        <parameter type="vector<Solution *>&" name="result" description="The resultant solutions" />
+    </method>   
+
+</methods>
+
+<tests>
+    <test name="get_top_solutions" description="Retrieve the top solutions" exception="false" />
+</tests> 
+
+</class>
+
