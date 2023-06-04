@@ -24,6 +24,7 @@ add_executable (GeneticTests
 	Tests/Example_Tests.cpp
 	Tests/Population_Tests.cpp
 	Tests/ImageLoader_Tests.cpp
+	Tests/FilterClassifier_Tests.cpp
 )
 
 # Add link libraries

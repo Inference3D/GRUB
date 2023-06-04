@@ -76,7 +76,7 @@ void Population::GetTopSolutions(int number, vector<Solution *>& result)
 			auto added = false;
 			for (auto i = 0; i < result.size(); i++) 
 			{
-				if (result[i]->GetScore() < solution->GetScore()) 
+				if (result[i]->GetError() < solution->GetError()) 
 				{
 					result.insert(result.begin() + i, solution);
 					added = true;

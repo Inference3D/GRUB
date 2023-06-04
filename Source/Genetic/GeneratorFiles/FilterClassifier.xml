@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+
+<class>
+
+<namespace>NVL_App</namespace>
+<solution>GeneticLib</solution>
+<name>FilterClassifier</name>
+<description>The implementation of a filter classifier</description>
+
+<includes>
+    <include name="iostream" namespace="std" local="false" />
+    <include name="opencv2/opencv.hpp" namespace="cv" local="false" />
+    <include name="Solution.h" local="true" />
+</includes>
+
+<variables>
+    <variable type="Mat" name="filter" code="10" />
+    <variable type="double" name="offset" code="10" />
+</variables>
+
+<constructors>
+    <constructor type="custom" inline="false">
+        <parameter type="Solution *" name="solution" description="The solution that we are initializing from" />
+    </constructor>
+</constructors>
+
+<methods>
+
+    <!-- Perform Evaluation -->
+    <method section="Evaluation" access="public" return="double" name="Evaluate" description="Perform the evaluate" inline="false">
+        <parameter type="const Point&" name="point" description="The point that we dealing with" />
+        <parameter type="Mat&" name="image" description="The image that we are matching" />
+    </method>    
+
+</methods>
+
+<tests>
+    <test name="evaluation_test" description="Test that the evaluation was predictable" exception="false" />
+</tests> 
+
+</class>

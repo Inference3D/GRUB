@@ -15,4 +15,5 @@ add_library (GeneticLib STATIC
 	Tools/ImageLoader.cpp
 	ArgUtils.cpp
 	Population.cpp
+	FilterClassifier.cpp
 )

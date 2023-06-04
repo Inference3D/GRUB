@@ -72,7 +72,7 @@ Solution * CreateSolution(int id, const string dna, double score)
 	auto result = new Solution(id, dnaVector);
 
 	// Set the score associated with the result
-	result->SetScore(score);
+	result->SetError(score);
 
 	// Return the result
 	return result;

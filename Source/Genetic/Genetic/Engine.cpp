@@ -56,5 +56,4 @@ void Engine::Run()
         if (dataPoint.get() == nullptr) break;
         imshow("image", dataPoint->GetImage()); waitKey();
     }
-
 }
