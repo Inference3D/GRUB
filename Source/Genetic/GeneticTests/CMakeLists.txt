@@ -23,11 +23,11 @@ set_target_properties(UnitTestLib PROPERTIES
 add_executable (GeneticTests
 	Tests/Example_Tests.cpp
 	Tests/Population_Tests.cpp
+	Tests/ImageLoader_Tests.cpp
 )
 
-
 # Add link libraries
-target_link_libraries(GeneticTests GeneticLib NVLib ${OpenCV_LIBS} UnitTestLib GTest::Main)
+target_link_libraries(GeneticTests GeneticLib NVLib ${OpenCV_LIBS} UnitTestLib OpenSSL::SSL uuid GTest::Main)
 
 # Find the associated unit tests
 gtest_discover_tests(GeneticTests)

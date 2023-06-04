@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+
+<class>
+
+<namespace>NVL_App</namespace>
+<solution>GeneticLib</solution>
+<name>ImageLoader</name>
+<description>A tool for loading test/training images</description>
+
+<includes>
+    <include name="unordered_map" namespace="std" local="false" />
+    <include name="iostream" namespace="std" local="false" />
+    <include name="opencv2/opencv.hpp" namespace="cv" local="false" />
+    <include name="NVLib/FileUtils.h" local="false" />
+    <include name="PathHelper.h" local="true" />
+    <include name="TestImage.h" local="true" />
+</includes>
+
+<variables>
+    <variable type="vector<string>" name="paths" code="10" />
+    <variable type="vector<int>" name="classes" code="10" />
+    <variable type="int" name="position" code="10" />
+</variables>
+
+<constructors>
+
+    <constructor type="custom" inline="false">
+        <parameter type="PathHelper&" name="pathHelper" description="A helper for loading variables" />
+        <parameter type="const string&" name="lookupName" description="The name of the lookup file that we want to use" />
+    </constructor>
+
+</constructors>
+
+<methods>
+    
+    <!-- Retrieve the next image in the set-->
+    <method section="Next" access="public" return="unique_ptr<TestImage>" name="Next" description="Retrieve the next image within the list" inline="false" />
+
+    <!-- Reset the current image pointer -->
+    <method section="Reset" access="public" return="void" name="Reset" description="Reset the pointer to the current image" inline="false" />
+
+    <!-- Retrieve the total image count -->
+    <method section="Image Count" access="public" return="int" name="GetCount" description="Retrieve the number of images" inline="false" />
+
+    <!-- Private: Get image index from name -->
+    <method section="Helpers" access="private" return="int" name="GetImageIndex" description="Retrieve the index image from the path" inline="false">
+        <parameter type="const string&" name="path" description="The path that we are trying to extract the value for" />
+    </method>    
+
+    <!-- Private: Load image class lookup -->
+    <method section="Helpers" access="private" return="unordered_map<int, int>" name="LoadLookup" description="Load the class lookup from disk" inline="false">
+        <parameter type="const string&" name="folder" description="The folder that we are looking up" />
+        <parameter type="const string&" name="lookupName" description="The name of the lookup file that we are using" />
+    </method>    
+
+    <!-- Private: Load image files -->
+    <method section="Helpers" access="private" return="vector<string>" name="GetFiles" description="Retrieve the list of image files within the folder" inline="false">
+        <parameter type="const string&" name="folder" description="The folder that we are retrieving files from" />
+    </method>    
+
+</methods>
+
+<tests>
+    <test name="test_image_cycle" description="Determines that we can cycle thru a set of images within the database" exception="false" />
+</tests> 
+
+</class>

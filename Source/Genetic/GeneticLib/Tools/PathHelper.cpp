@@ -20,7 +20,7 @@ using namespace NVL_App;
  */
 PathHelper::PathHelper(const string& database, const string& dataset) : _database(database), _dataset(dataset)
 {
-	// TODO: Extra constructor logic can go here
+	_basePath = NVLib::FileUtils::PathCombine(database, dataset);
 }
 
 //--------------------------------------------------
@@ -45,7 +45,6 @@ string PathHelper::GetMetaFolder()
 	return GetPath("meta");
 }
 
-
 //--------------------------------------------------
 // Helpers
 //--------------------------------------------------
@@ -57,6 +56,5 @@ string PathHelper::GetMetaFolder()
  */
 string PathHelper::GetPath(const string& folder)
 {
-	auto basePath = NVLib::FileUtils::PathCombine(_database, _dataset);
-	return NVLib::FileUtils::PathCombine(basePath, folder);
+	return NVLib::FileUtils::PathCombine(_basePath, folder);
 }

@@ -33,6 +33,9 @@ set_target_properties(NVLib PROPERTIES
 find_package( OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
+# Add OpenSSL to the solution
+find_package(OpenSSL REQUIRED)
+
 # Add the available subfolders
 add_subdirectory(GeneticLib)
 add_subdirectory(GeneticTests)

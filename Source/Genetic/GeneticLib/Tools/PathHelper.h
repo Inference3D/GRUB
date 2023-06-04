@@ -20,11 +20,16 @@ namespace NVL_App
 	private:
 		string _database;
 		string _dataset;
+		string _basePath;
 	public:
 		PathHelper(const string& database, const string& dataset);
 
 		string GetRawFolder();
 		string GetMetaFolder();
+
+		inline string& GetDatabase() { return _database; }
+		inline string& GetDataset() { return _dataset; }
+		inline string& GetBasePath() { return _basePath; }
 
 	private:
 		string GetPath(const string& folder);
