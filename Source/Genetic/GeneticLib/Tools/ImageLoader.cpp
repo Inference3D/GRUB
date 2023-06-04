@@ -38,7 +38,7 @@ unique_ptr<TestImage> ImageLoader::Next()
 	auto index = _position++; if (index >= _paths.size()) return unique_ptr<TestImage>(nullptr);
 
 	auto id = GetImageIndex(_paths[index]);
-	Mat image = imread(_paths[index]);
+	Mat image = imread(_paths[index], IMREAD_GRAYSCALE);
 
 	if (_classes.find(id) == _classes.end()) return unique_ptr<TestImage>(nullptr);
 	auto imageType = _classes[id];

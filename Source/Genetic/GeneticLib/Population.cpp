@@ -76,7 +76,7 @@ void Population::GetTopSolutions(int number, vector<Solution *>& result)
 			auto added = false;
 			for (auto i = 0; i < result.size(); i++) 
 			{
-				if (result[i]->GetError() < solution->GetError()) 
+				if (result[i]->GetError() > solution->GetError()) 
 				{
 					result.insert(result.begin() + i, solution);
 					added = true;
@@ -85,7 +85,7 @@ void Population::GetTopSolutions(int number, vector<Solution *>& result)
 			}
 
 			if (result.size() > number) result.erase(result.begin() + (int)(result.size() - 1));
-			else if (result.size() < number) result.push_back(solution);
+			else if (result.size() < number && !added) result.push_back(solution);
 		}
 	}
 }

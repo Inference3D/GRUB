@@ -45,9 +45,9 @@ TEST(Population_Test, get_top_solutions)
 	auto top = vector<Solution *>(); population.GetTopSolutions(3, top);
 
 	// Verify the top solutions
-	ASSERT_EQ(top[0]->GetId(), 4);
-	ASSERT_EQ(top[1]->GetId(), 6);
-	ASSERT_EQ(top[2]->GetId(), 3);
+	ASSERT_EQ(top[0]->GetId(), 5);
+	ASSERT_EQ(top[1]->GetId(), 2);
+	ASSERT_EQ(top[2]->GetId(), 1);
 }
 
 //--------------------------------------------------

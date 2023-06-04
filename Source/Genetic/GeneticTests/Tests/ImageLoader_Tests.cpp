@@ -77,8 +77,8 @@ void GenerateDatabase(PathHelper& pathHelper)
 	// Create some test images
 	for (auto i = 0; i < 6; i++) 
 	{
-		Mat image = Mat_<Vec3b>::zeros(100, 100);
-		putText(image, NVLib::StringUtils::Int2String(i), Point(30,70), FONT_HERSHEY_COMPLEX, 2, Scalar(0, 255, 0));
+		Mat image = Mat_<uchar>::zeros(100, 100);
+		putText(image, NVLib::StringUtils::Int2String(i), Point(30,70), FONT_HERSHEY_COMPLEX, 2, Scalar(255));
 		auto imageName = (string)(NVLib::Formatter() << "image_" << setw(4) << setfill('0') << i << ".png");
 		auto path = NVLib::FileUtils::PathCombine(pathHelper.GetRawFolder(), imageName);
 		imwrite(path, image);
