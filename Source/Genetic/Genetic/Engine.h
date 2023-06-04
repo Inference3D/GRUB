@@ -12,7 +12,9 @@
 using namespace std;
 
 #include <NVLib/Logger.h>
+
 #include <GeneticLib/ArgUtils.h>
+#include <GeneticLib/Tools/ImageLoader.h>
 
 namespace NVL_App
 {
@@ -21,6 +23,7 @@ namespace NVL_App
 	private:
 		NVLib::Parameters * _parameters;
 		NVLib::Logger* _logger;
+		ImageLoader * _loader;
 	public:
 		Engine(NVLib::Logger* logger, NVLib::Parameters * parameters);
 		~Engine();

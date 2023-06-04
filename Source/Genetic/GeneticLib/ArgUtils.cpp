@@ -16,8 +16,8 @@ using namespace NVL_App;
 /**
  * @brief Load parameters
  * @param appName The name of the application
- * @param argc The number of incomming parameter arguments
- * @param argv The incomming variables
+ * @param argc The number of incoming parameter arguments
+ * @param argv The incoming variables
  * @return NVLib::Parameters * Returns a NVLib::Parameters *
  */
 NVLib::Parameters * ArgUtils::Load(const string& appName, int argc, char ** argv)

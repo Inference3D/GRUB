@@ -21,6 +21,15 @@ using namespace NVL_App;
 Engine::Engine(NVLib::Logger* logger, NVLib::Parameters* parameters) 
 {
     _logger = logger; _parameters = parameters;
+
+    logger->Log(1, "Retrieving input parameters");
+    auto database = ArgUtils::GetString(parameters, "database");
+    auto dataset = ArgUtils::GetString(parameters, "dataset");
+    auto classFile = ArgUtils::GetString(parameters, "class_file");
+    auto helper = PathHelper(database, dataset);
+
+    logger->Log(1, "Setting up an image loader");
+    _loader = new ImageLoader(helper, classFile);
 }
 
 /**
@@ -29,6 +38,7 @@ Engine::Engine(NVLib::Logger* logger, NVLib::Parameters* parameters)
 Engine::~Engine() 
 {
     delete _parameters;
+    delete _loader;
 }
 
 //--------------------------------------------------
@@ -40,5 +50,11 @@ Engine::~Engine()
  */
 void Engine::Run()
 {
-    // TODO: Execution Logic
+    while (true) 
+    {
+        auto dataPoint = _loader->Next();
+        if (dataPoint.get() == nullptr) break;
+        imshow("image", dataPoint->GetImage()); waitKey();
+    }
+
 }
