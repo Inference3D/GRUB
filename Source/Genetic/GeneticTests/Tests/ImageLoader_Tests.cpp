@@ -32,10 +32,27 @@ TEST(ImageLoader_Test, test_image_cycle)
 	auto helper = PathHelper("database", "test"); GenerateDatabase(helper);
 
 	// Execute
+	auto loader = ImageLoader(helper, "classes.txt");
+	ASSERT_EQ(loader.GetCount(), 6);
 
-	// Confirm
+	// Check the individual elements
+	for (auto i = 0; i < 7; i++) 
+	{
+		auto dataPoint = loader.Next();
 
-	// Teardown
+		if (i == 0) ASSERT_EQ(dataPoint->GetImageType(), 1);
+		else if (i == 6) 
+		{
+			ASSERT_EQ(dataPoint.get(), nullptr);
+			continue;
+		}
+		else ASSERT_EQ(dataPoint->GetImageType(), 0);
+
+		ASSERT_EQ(dataPoint->GetId(), i);
+
+		ASSERT_EQ(dataPoint->GetImage().rows, 100);
+		ASSERT_EQ(dataPoint->GetImage().cols, 100);
+	}
 }
 
 //--------------------------------------------------

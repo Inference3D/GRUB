@@ -18,9 +18,10 @@ using namespace NVL_App;
  * @param pathHelper A helper for loading variables
  * @param lookupName The name of the lookup file that we want to use
  */
-ImageLoader::ImageLoader(PathHelper& pathHelper, const string& lookupName)
+ImageLoader::ImageLoader(PathHelper& pathHelper, const string& lookupName) : _position(0)
 {
-	throw runtime_error("Not implemented");
+	_paths = GetFiles(pathHelper.GetRawFolder());
+	_classes = LoadLookup(pathHelper.GetMetaFolder(), lookupName);
 }
 
 //--------------------------------------------------
@@ -33,7 +34,17 @@ ImageLoader::ImageLoader(PathHelper& pathHelper, const string& lookupName)
  */
 unique_ptr<TestImage> ImageLoader::Next()
 {
-	throw runtime_error("Not implemented");
+	// Get and valid the index
+	auto index = _position++; if (index >= _paths.size()) return unique_ptr<TestImage>(nullptr);
+
+	auto id = GetImageIndex(_paths[index]);
+	Mat image = imread(_paths[index]);
+
+	if (_classes.find(id) == _classes.end()) return unique_ptr<TestImage>(nullptr);
+	auto imageType = _classes[id];
+	if (imageType < 0) return unique_ptr<TestImage>(nullptr);
+
+	return unique_ptr<TestImage>(new TestImage(id, image, imageType));
 }
 
 //--------------------------------------------------
@@ -45,7 +56,7 @@ unique_ptr<TestImage> ImageLoader::Next()
  */
 void ImageLoader::Reset()
 {
-	throw runtime_error("Not implemented");
+	_position = 0;
 }
 
 //--------------------------------------------------
@@ -58,7 +69,7 @@ void ImageLoader::Reset()
  */
 int ImageLoader::GetCount()
 {
-	throw runtime_error("Not implemented");
+	return (int) _paths.size();
 }
 
 //--------------------------------------------------
@@ -72,7 +83,12 @@ int ImageLoader::GetCount()
  */
 int ImageLoader::GetImageIndex(const string& path)
 {
-	throw runtime_error("Not implemented");
+	auto fileName = NVLib::FileUtils::GetFileName(path);
+	auto fileName_no_ext = NVLib::FileUtils::GetNameWithoutExtension(fileName);
+	auto parts = vector<string>(); NVLib::StringUtils::Split(fileName_no_ext, '_', parts);
+	if (parts.size() != 2) return -1;
+	auto index = NVLib::StringUtils::String2Int(parts[1]);
+	return index;
 }
 
 /**
@@ -83,7 +99,29 @@ int ImageLoader::GetImageIndex(const string& path)
  */
 unordered_map<int, int> ImageLoader::LoadLookup(const string& folder, const string& lookupName)
 {
-	throw runtime_error("Not implemented");
+	// The result that we dealing 
+	auto result = unordered_map<int, int>();
+
+	// Open the reader
+	auto path = NVLib::FileUtils::PathCombine(folder, lookupName);
+	auto reader = ifstream(path); if (!reader.is_open()) throw runtime_error("Unable for open: " + path);
+
+	// Read the lines
+	while (true) 
+	{
+		auto line = string();
+		getline(reader, line); if (line == string()) break;
+		auto parts = vector<string>(); NVLib::StringUtils::Split(line, ',', parts);
+		auto index = NVLib::StringUtils::String2Int(parts[0]);
+		auto classes = NVLib::StringUtils::String2Int(parts[1]);
+		result[index] = classes;
+	}
+
+	// Close the file
+	reader.close();
+
+	// Return the result
+	return result;
 }
 
 /**
@@ -93,5 +131,19 @@ unordered_map<int, int> ImageLoader::LoadLookup(const string& folder, const stri
  */
 vector<string> ImageLoader::GetFiles(const string& folder)
 {
-	throw runtime_error("Not implemented");
+	// Create a variable to hold the result
+	auto result = vector<string>();
+	
+	// Get all the files within folder
+	auto files = vector<string>(); NVLib::FileUtils::GetFileList(folder, files);
+
+	// Filter out the "invalid" files
+	for (auto& file : files) 
+	{
+		auto extension = NVLib::FileUtils::GetExtension(file);
+		if (extension == "png") result.push_back(file);
+	}
+
+	// Return the result
+	return result;
 }

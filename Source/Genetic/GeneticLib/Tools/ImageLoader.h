@@ -25,7 +25,7 @@ namespace NVL_App
 	{
 	private:
 		vector<string> _paths;
-		vector<int> _classes;
+		unordered_map<int, int> _classes;
 		int _position;
 	public:
 		ImageLoader(PathHelper& pathHelper, const string& lookupName);
@@ -35,7 +35,7 @@ namespace NVL_App
 		int GetCount();
 
 		inline vector<string>& GetPaths() { return _paths; }
-		inline vector<int>& GetClasses() { return _classes; }
+		inline unordered_map<int, int>& GetClasses() { return _classes; }
 		inline int& GetPosition() { return _position; }
 
 	private:
