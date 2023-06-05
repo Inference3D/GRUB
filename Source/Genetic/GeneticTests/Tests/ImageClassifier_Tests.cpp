@@ -11,6 +11,8 @@
 #include <GeneticLib/Instance/ImageClassifier/ImageClassifier.h>
 using namespace NVL_App;
 
+#include "../Helpers/SequenceGenerator.h"
+
 //--------------------------------------------------
 // Test Methods
 //--------------------------------------------------
