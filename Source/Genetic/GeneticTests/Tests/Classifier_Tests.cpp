@@ -1,5 +1,5 @@
 //--------------------------------------------------
-// Unit Tests for class ImageClassifier
+// Unit Tests for class Classifier
 //
 // @author: Wild Boar
 //
@@ -10,7 +10,7 @@
 
 #include <NVLib/Formatter.h>
 
-#include <GeneticLib/Instance/ImageClassifier/ImageClassifier.h>
+#include <GeneticLib/Instance/ImageClassifier/Classifier.h>
 using namespace NVL_App;
 
 #include "../Helpers/SequenceGenerator.h"
@@ -30,7 +30,7 @@ unique_ptr<GeneratorBase> GetGenerator(Mat& image, int offset);
 /**
  * @brief Confirm that evaluation is working correctly
  */
-TEST(ImageClassifier_Test, evaluation_test)
+TEST(Classifier_Test, evaluation_test)
 {
 	// Create the test images
 	Mat image_1 = Mat_<uchar>::zeros(100, 100); rectangle(image_1, Rect(10, 10, 80, 80), Scalar(1), FILLED);
@@ -45,7 +45,7 @@ TEST(ImageClassifier_Test, evaluation_test)
 	auto solution = BuildSolution(0, image_2);
 
 	// Perform an evaluation
-	auto evaluator = ImageClassifier(&loader);
+	auto evaluator = Classifier(&loader);
 	auto error = evaluator.GetError(solution.get());
 
 	// Check that the error is what was expected
@@ -56,7 +56,7 @@ TEST(ImageClassifier_Test, evaluation_test)
 /**
  * @brief Confirm that the representation is correct
  */
-TEST(ImageClassifier_Test, string_representation)
+TEST(Classifier_Test, string_representation)
 {
 	// Create the test images
 	Mat image_1 = Mat_<uchar>::zeros(100, 100); rectangle(image_1, Rect(10, 10, 80, 80), Scalar(1), FILLED);
@@ -71,7 +71,7 @@ TEST(ImageClassifier_Test, string_representation)
 	auto solution = BuildSolution(0, image_2);
 
 	// Convert solution to text
-	auto evaluator = ImageClassifier(&loader);
+	auto evaluator = Classifier(&loader);
 	auto textSolution = evaluator.ToString(solution.get());
 
 	// Evaluate the solution
@@ -81,7 +81,7 @@ TEST(ImageClassifier_Test, string_representation)
 /**
  * @brief Confirm the solution generation logic
  */
-TEST(ImageClassifier_Test, solution_generation)
+TEST(Classifier_Test, solution_generation)
 {
 	// Create the test images
 	Mat image_1 = Mat_<uchar>::zeros(100, 100); rectangle(image_1, Rect(10, 10, 80, 80), Scalar(1), FILLED);
@@ -94,7 +94,7 @@ TEST(ImageClassifier_Test, solution_generation)
 	auto loader = ImageLoader(helper, "classes.txt");
 
 	// Create an evaluator
-	auto evaluator = ImageClassifier(&loader);
+	auto evaluator = Classifier(&loader);
 
 	// Perform solution creation
 	auto createGenerator = GetGenerator(image_1, 5);

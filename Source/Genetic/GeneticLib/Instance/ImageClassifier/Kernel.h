@@ -18,13 +18,13 @@ using namespace cv;
 
 namespace NVL_App
 {
-	class FilterClassifier
+	class Kernel
 	{
 	private:
 		Mat _kernel;
 		double _offset;
 	public:
-		FilterClassifier(Solution * solution);
+		Kernel(Solution * solution);
 
 		double Evaluate(Mat& image);
 

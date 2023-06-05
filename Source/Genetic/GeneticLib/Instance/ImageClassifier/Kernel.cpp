@@ -6,7 +6,7 @@
 // @date: 2023-06-04
 //--------------------------------------------------
 
-#include "FilterClassifier.h"
+#include "Kernel.h"
 using namespace NVL_App;
 
 //--------------------------------------------------
@@ -17,7 +17,7 @@ using namespace NVL_App;
  * @brief Custom Constructor
  * @param solution The solution that we are initializing from
  */
-FilterClassifier::FilterClassifier(Solution * solution)
+Kernel::Kernel(Solution * solution)
 {
 	// Determine the size
 	auto count = solution->GetDna().size() - 2;
@@ -45,7 +45,7 @@ FilterClassifier::FilterClassifier(Solution * solution)
  * @param image The image that we are matching
  * @return double Returns a double
  */
-double FilterClassifier::Evaluate(Mat& image)
+double Kernel::Evaluate(Mat& image)
 {
 	Mat floatImage; image.convertTo(floatImage, CV_32F);
 	Mat partial; multiply(_kernel, floatImage, partial);

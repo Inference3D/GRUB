@@ -8,7 +8,7 @@
 
 #include <gtest/gtest.h>
 
-#include <GeneticLib/Instance/ImageClassifier/FilterClassifier.h>
+#include <GeneticLib/Instance/ImageClassifier/Kernel.h>
 using namespace NVL_App;
 
 //--------------------------------------------------
@@ -18,7 +18,7 @@ using namespace NVL_App;
 /**
  * @brief Test that the evaluation was predictable
  */
-TEST(FilterClassifier_Test, evaluation_test)
+TEST(Kernel_Test, evaluation_test)
 {
 	// Create the image
 	Mat image = Mat_<uchar>::zeros(100, 100);
@@ -31,9 +31,9 @@ TEST(FilterClassifier_Test, evaluation_test)
 	auto solution = Solution(1, dna);
 
 	// Create a classifier
-	auto classifier = FilterClassifier(&solution);
+	auto kernel = Kernel(&solution);
 
 	// Verify the expected fire
-	auto score = classifier.Evaluate(image); 
+	auto score = kernel.Evaluate(image); 
 	ASSERT_EQ(score, 6405);
 }

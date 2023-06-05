@@ -21,12 +21,12 @@ using namespace cv;
 
 namespace NVL_App
 {
-	class ImageClassifier : public InstanceEngineBase
+	class Classifier : public InstanceEngineBase
 	{
 	private:
 		ImageLoader * _loader;
 	public:
-		ImageClassifier(ImageLoader * loader);
+		Classifier(ImageLoader * loader);
 
 		virtual Vec2d GetError(Solution * solution) override;
 		virtual string ToString(Solution * solution) override;

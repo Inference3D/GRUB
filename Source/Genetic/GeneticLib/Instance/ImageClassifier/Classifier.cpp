@@ -1,12 +1,12 @@
 //--------------------------------------------------
-// Implementation of class ImageClassifier
+// Implementation of class Classifier
 //
 // @author: Wild Boar
 //
 // @date: 2023-06-05
 //--------------------------------------------------
 
-#include "ImageClassifier.h"
+#include "Classifier.h"
 using namespace NVL_App;
 
 //--------------------------------------------------
@@ -17,7 +17,7 @@ using namespace NVL_App;
  * @brief Custom Constructor
  * @param loader Defines an image loader for the system
  */
-ImageClassifier::ImageClassifier(ImageLoader * loader)
+Classifier::Classifier(ImageLoader * loader)
 {
 	throw runtime_error("Not implemented");
 }
@@ -31,7 +31,7 @@ ImageClassifier::ImageClassifier(ImageLoader * loader)
  * @param solution The solution that we are testing
  * @return Vec2d Returns a Vec2d
  */
-Vec2d ImageClassifier::GetError(Solution * solution)
+Vec2d Classifier::GetError(Solution * solution)
 {
 	throw runtime_error("Not implemented");
 }
@@ -45,7 +45,7 @@ Vec2d ImageClassifier::GetError(Solution * solution)
  * @param  
  * @return string Returns a string
  */
-string ImageClassifier::ToString(Solution * )
+string Classifier::ToString(Solution * )
 {
 	throw runtime_error("Not implemented");
 }
@@ -60,7 +60,7 @@ string ImageClassifier::ToString(Solution * )
  * @param solutionId An identifier for the solution
  * @return Solution * Returns a Solution *
  */
-Solution * ImageClassifier::Create(GeneratorBase * generator, int solutionId)
+Solution * Classifier::Create(GeneratorBase * generator, int solutionId)
 {
 	throw runtime_error("Not implemented");
 }
@@ -76,7 +76,7 @@ Solution * ImageClassifier::Create(GeneratorBase * generator, int solutionId)
  * @param probably The probably that the solution will be mutated
  * @return An indication whether the solution was mutated or not
  */
-bool ImageClassifier::Mutate(GeneratorBase * generator, Solution * solution, double probably)
+bool Classifier::Mutate(GeneratorBase * generator, Solution * solution, double probably)
 {
 	throw runtime_error("Not implemented");
 }
