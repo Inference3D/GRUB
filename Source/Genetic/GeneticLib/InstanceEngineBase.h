@@ -11,9 +11,11 @@
 #include <iostream>
 using namespace std;
 
-#include <opencv2/opencv.h>
+#include <opencv2/opencv.hpp>
+using namespace cv;
 
 #include "Solution.h"
+#include "Tools/GeneratorBase.h"
 
 namespace NVL_App
 {
@@ -24,7 +26,7 @@ namespace NVL_App
 
 		virtual Vec2d GetError(Solution * solution) = 0;
 		virtual string ToString(Solution * solution) = 0;
-		virtual Solution * Create() = 0;
-		virtual void Mutate(Solution * solution, double probably) = 0;
+		virtual Solution * Create(GeneratorBase * generator) = 0;
+		virtual void Mutate(GeneratorBase * generator, Solution * solution, double probably) = 0;
 	};
 }

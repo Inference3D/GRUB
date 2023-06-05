@@ -7,12 +7,13 @@
 #--------------------------------------------------------
 
 # Setup includes directories
-include_directories("../" "${LIBRARY_BASE}/NVLib")
+include_directories("../" "../GeneticLib/" "${LIBRARY_BASE}/NVLib")
 
 # Create Library
 add_library (GeneticLib STATIC
 	Tools/PathHelper.cpp
 	Tools/ImageLoader.cpp
+	Instance/ImageClassifier/ImageClassifier.cpp
 	ArgUtils.cpp
 	Population.cpp
 	FilterClassifier.cpp

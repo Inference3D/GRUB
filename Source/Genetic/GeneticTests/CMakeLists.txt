@@ -10,7 +10,7 @@
 find_package(GTest REQUIRED)
 
 # Setup the includes
-include_directories("../")
+include_directories("../" "../GeneticLib")
 
 # Add the UnitTestLib library to the folder
 add_library(UnitTestLib STATIC IMPORTED)
@@ -25,6 +25,7 @@ add_executable (GeneticTests
 	Tests/Population_Tests.cpp
 	Tests/ImageLoader_Tests.cpp
 	Tests/FilterClassifier_Tests.cpp
+	Tests/ImageClassifier_Tests.cpp
 )
 
 # Add link libraries

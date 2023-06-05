@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+
+<class>
+
+<namespace>NVL_App</namespace>
+<solution>GeneticLib</solution>
+<name>GeneratorBase</name>
+<description>A base class for unit tests that can swap between "real" and "unit test" versions</description>
+
+<includes>
+    <include name="iostream" namespace="std" local="false" />
+    <include name="NVLib/RandomUtils.h" local="false" />
+</includes>
+
+<constructors>
+
+    <!-- Main Constructor -->
+    <constructor type="empty" inline="true" />
+
+</constructors>
+
+<methods>
+
+    <!-- Main Invocation of the random number-->
+    <method section="generate" modifiers="virtual" access="public" return="int" name="Generate" description="Generate a random number" inline="true">
+        <parameter type="int" name="min" description="The minimum value that we are generating" />
+        <parameter type="int" name="max" description="The maximum value that we are generating" />
+    </method>    
+
+</methods>
+
+</class>
