@@ -15,20 +15,21 @@ using namespace std;
 using namespace cv;
 
 #include "Solution.h"
+using namespace NVL_App;
 
-namespace NVL_App
+namespace NVL_AI
 {
 	class Kernel
 	{
 	private:
-		Mat _kernel;
+		Mat _weights;
 		double _offset;
 	public:
 		Kernel(Solution * solution);
 
 		double Evaluate(Mat& image);
 
-		inline Mat& GetKernel() { return _kernel; }
+		inline Mat& GetWeights() { return _weights; }
 		inline double& GetOffset() { return _offset; }
 	};
 }

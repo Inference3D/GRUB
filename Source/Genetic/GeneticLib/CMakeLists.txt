@@ -13,7 +13,7 @@ include_directories("../" "../GeneticLib/" "${LIBRARY_BASE}/NVLib")
 add_library (GeneticLib STATIC
 	Tools/PathHelper.cpp
 	Tools/ImageLoader.cpp
-	Instance/ImageClassifier/Classifier.cpp
+	Instance/ImageClassifier/LearnWrapper.cpp
 	Instance/ImageClassifier/Kernel.cpp
 	ArgUtils.cpp
 	Population.cpp

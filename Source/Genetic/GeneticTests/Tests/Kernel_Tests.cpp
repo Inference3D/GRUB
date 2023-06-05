@@ -9,7 +9,7 @@
 #include <gtest/gtest.h>
 
 #include <GeneticLib/Instance/ImageClassifier/Kernel.h>
-using namespace NVL_App;
+using namespace NVL_AI;
 
 //--------------------------------------------------
 // Test Methods

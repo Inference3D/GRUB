@@ -1,5 +1,5 @@
 //--------------------------------------------------
-// Unit Tests for class Classifier
+// Unit Tests for class LearnWrapper
 //
 // @author: Wild Boar
 //
@@ -10,10 +10,11 @@
 
 #include <NVLib/Formatter.h>
 
-#include <GeneticLib/Instance/ImageClassifier/Classifier.h>
-using namespace NVL_App;
+#include <GeneticLib/Instance/ImageClassifier/LearnWrapper.h>
+using namespace NVL_AI;
 
 #include "../Helpers/SequenceGenerator.h"
+using namespace NVL_App;
 
 //--------------------------------------------------
 // Function Prototypes
@@ -45,7 +46,7 @@ TEST(Classifier_Test, evaluation_test)
 	auto solution = BuildSolution(0, image_2);
 
 	// Perform an evaluation
-	auto evaluator = Classifier(&loader);
+	auto evaluator = LearnWrapper(&loader);
 	auto error = evaluator.GetError(solution.get());
 
 	// Check that the error is what was expected
@@ -71,7 +72,7 @@ TEST(Classifier_Test, string_representation)
 	auto solution = BuildSolution(0, image_2);
 
 	// Convert solution to text
-	auto evaluator = Classifier(&loader);
+	auto evaluator = LearnWrapper(&loader);
 	auto textSolution = evaluator.ToString(solution.get());
 
 	// Evaluate the solution
@@ -94,7 +95,7 @@ TEST(Classifier_Test, solution_generation)
 	auto loader = ImageLoader(helper, "classes.txt");
 
 	// Create an evaluator
-	auto evaluator = Classifier(&loader);
+	auto evaluator = LearnWrapper(&loader);
 
 	// Perform solution creation
 	auto createGenerator = GetGenerator(image_1, 5);

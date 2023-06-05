@@ -18,15 +18,16 @@ using namespace cv;
 #include "Tools/ImageLoader.h"
 #include "InstanceEngineBase.h"
 #include "Solution.h"
+using namespace NVL_App;
 
-namespace NVL_App
+namespace NVL_AI
 {
-	class Classifier : public InstanceEngineBase
+	class LearnWrapper : public InstanceEngineBase
 	{
 	private:
 		ImageLoader * _loader;
 	public:
-		Classifier(ImageLoader * loader);
+		LearnWrapper(ImageLoader * loader);
 
 		virtual Vec2d GetError(Solution * solution) override;
 		virtual string ToString(Solution * solution) override;

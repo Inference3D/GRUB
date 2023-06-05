@@ -1,5 +1,5 @@
 //--------------------------------------------------
-// Implementation of class FilterClassifier
+// Implementation of class Kernel
 //
 // @author: Wild Boar
 //
@@ -7,7 +7,7 @@
 //--------------------------------------------------
 
 #include "Kernel.h"
-using namespace NVL_App;
+using namespace NVL_AI;
 
 //--------------------------------------------------
 // Constructors and Terminators
@@ -24,15 +24,15 @@ Kernel::Kernel(Solution * solution)
 	auto width = sqrt(count);
 
 	// Create the variable
-	_kernel = Mat_<float>::zeros(width, width);
-	auto link = (float *)_kernel.data;
+	_weights = Mat_<float>::zeros(width, width);
+	auto link = (float *)_weights.data;
 
 	// Retrieve the scale variables
 	auto scale = (float) solution->GetDna()[count];
 	_offset = solution->GetDna()[count + 1];
 
 	// Clear the DNA the variables
-	auto pixelCount = _kernel.cols * _kernel.rows;
+	auto pixelCount = _weights.cols * _weights.rows;
 	for (auto i = 0; i < pixelCount; i++) link[i] = solution->GetDna()[i] / scale;
 }
 
@@ -48,7 +48,7 @@ Kernel::Kernel(Solution * solution)
 double Kernel::Evaluate(Mat& image)
 {
 	Mat floatImage; image.convertTo(floatImage, CV_32F);
-	Mat partial; multiply(_kernel, floatImage, partial);
+	Mat partial; multiply(_weights, floatImage, partial);
 	auto total = sum(partial);
 	return total[0] + _offset;
 }

@@ -25,7 +25,7 @@ add_executable (GeneticTests
 	Tests/Population_Tests.cpp
 	Tests/ImageLoader_Tests.cpp
 	Tests/Kernel_Tests.cpp
-	Tests/Classifier_Tests.cpp
+	Tests/LearnWrapper_Tests.cpp
 )
 
 # Add link libraries

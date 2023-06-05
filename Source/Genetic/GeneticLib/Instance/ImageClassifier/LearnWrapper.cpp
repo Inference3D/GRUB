@@ -6,8 +6,8 @@
 // @date: 2023-06-05
 //--------------------------------------------------
 
-#include "Classifier.h"
-using namespace NVL_App;
+#include "LearnWrapper.h"
+using namespace NVL_AI;
 
 //--------------------------------------------------
 // Constructors and Terminators
@@ -17,7 +17,7 @@ using namespace NVL_App;
  * @brief Custom Constructor
  * @param loader Defines an image loader for the system
  */
-Classifier::Classifier(ImageLoader * loader)
+LearnWrapper::LearnWrapper(ImageLoader * loader)
 {
 	throw runtime_error("Not implemented");
 }
@@ -31,7 +31,7 @@ Classifier::Classifier(ImageLoader * loader)
  * @param solution The solution that we are testing
  * @return Vec2d Returns a Vec2d
  */
-Vec2d Classifier::GetError(Solution * solution)
+Vec2d LearnWrapper::GetError(Solution * solution)
 {
 	throw runtime_error("Not implemented");
 }
@@ -45,7 +45,7 @@ Vec2d Classifier::GetError(Solution * solution)
  * @param  
  * @return string Returns a string
  */
-string Classifier::ToString(Solution * )
+string LearnWrapper::ToString(Solution * )
 {
 	throw runtime_error("Not implemented");
 }
@@ -60,7 +60,7 @@ string Classifier::ToString(Solution * )
  * @param solutionId An identifier for the solution
  * @return Solution * Returns a Solution *
  */
-Solution * Classifier::Create(GeneratorBase * generator, int solutionId)
+Solution * LearnWrapper::Create(GeneratorBase * generator, int solutionId)
 {
 	throw runtime_error("Not implemented");
 }
@@ -76,7 +76,7 @@ Solution * Classifier::Create(GeneratorBase * generator, int solutionId)
  * @param probably The probably that the solution will be mutated
  * @return An indication whether the solution was mutated or not
  */
-bool Classifier::Mutate(GeneratorBase * generator, Solution * solution, double probably)
+bool LearnWrapper::Mutate(GeneratorBase * generator, Solution * solution, double probably)
 {
 	throw runtime_error("Not implemented");
 }
