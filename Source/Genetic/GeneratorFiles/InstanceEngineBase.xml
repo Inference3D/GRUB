@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+
+<class>
+
+<namespace>NVL_App</namespace>
+<solution>GeneticLib</solution>
+<name>InstanceEngineBase</name>
+<description>A base class for representing the tangible elements of a solution</description>
+
+<includes>
+    <include name="iostream" namespace="std" local="false" />
+    <include name="Solution.h" local="false" />
+</includes>
+
+<constructors>
+
+    <!-- Main Constructor -->
+    <constructor type="empty" inline="false" />
+
+</constructors>
+
+<methods>
+
+    <!-- Determine the "error" for a given image -->
+    <method section="Evaluation" modifiers="virtual" access="public" return="Vec2d" name="GetError" description="Retrieve the error for the given solution" inline="true">
+        <parameter type="Solution *" name="solution" description="The solution that we are testing" />
+    </method>    
+
+    <!-- Determine the representation for the variable -->
+    <method section="String Representation" modifiers="virtual" access="public" return="string" name="ToString" description="Retrieve a string representation" inline="true">
+        <parameter type="Solution *" name="" description="" />
+    </method>    
+
+    <!-- The logic to generate a new solution -->
+    <method section="Generate" modifiers="virtual" access="public" return="Solution *" name="Create" description="Generate new solutions" inline="true" />
+
+    <!-- Mutate a solution so that it is still a valid solution -->
+    <method section="Mutate" modifiers="virtual" access="public" return="void" name="Mutate" description="Mutate solutions" inline="true">
+        <parameter type="Solution *" name="solution" description="The solution that is potentially mutate" />
+        <parameter type="double" name="probably" description="The probably that the solution will be mutated" />
+    </method>    
+
+</methods>
+
+</class>
