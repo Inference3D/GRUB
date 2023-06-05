@@ -8,7 +8,7 @@
 
 #include <gtest/gtest.h>
 
-#include <GeneticLib/FilterClassifier.h>
+#include <GeneticLib/Instance/ImageClassifier/FilterClassifier.h>
 using namespace NVL_App;
 
 //--------------------------------------------------

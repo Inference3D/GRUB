@@ -14,7 +14,8 @@ add_library (GeneticLib STATIC
 	Tools/PathHelper.cpp
 	Tools/ImageLoader.cpp
 	Instance/ImageClassifier/ImageClassifier.cpp
+	Instance/ImageClassifier/FilterClassifier.cpp
 	ArgUtils.cpp
 	Population.cpp
-	FilterClassifier.cpp
 )
+	
