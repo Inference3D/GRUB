@@ -23,14 +23,14 @@ namespace NVL_App
 {
 	class ImageClassifier : public InstanceEngineBase
 	{
-		private:
-			ImageLoader * _loader;
-		public:
-			ImageClassifier(ImageLoader * loader);
+	private:
+		ImageLoader * _loader;
+	public:
+		ImageClassifier(ImageLoader * loader);
 
-			virtual Vec2d GetError(Solution * solution) override;
-			virtual string ToString(Solution * solution) override;
-			virtual Solution * Create(GeneratorBase * generator) override;
-			virtual void Mutate(GeneratorBase * generator, Solution * solution, double probably) override;
+		virtual Vec2d GetError(Solution * solution) override;
+		virtual string ToString(Solution * solution) override;
+		virtual Solution * Create(GeneratorBase * generator, int solutionId) override;
+		virtual bool Mutate(GeneratorBase * generator, Solution * solution, double probably) override;
 	};
 }

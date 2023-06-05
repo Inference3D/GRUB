@@ -57,9 +57,10 @@ string ImageClassifier::ToString(Solution * )
 /**
  * @brief Generate new solutions
  * @param generator A source of random numbers
+ * @param solutionId An identifier for the solution
  * @return Solution * Returns a Solution *
  */
-Solution * ImageClassifier::Create(GeneratorBase * generator)
+Solution * ImageClassifier::Create(GeneratorBase * generator, int solutionId)
 {
 	throw runtime_error("Not implemented");
 }
@@ -73,8 +74,9 @@ Solution * ImageClassifier::Create(GeneratorBase * generator)
  * @param generator A source of random numbers
  * @param solution The solution that is potentially mutate
  * @param probably The probably that the solution will be mutated
+ * @return An indication whether the solution was mutated or not
  */
-void ImageClassifier::Mutate(GeneratorBase * generator, Solution * solution, double probably)
+bool ImageClassifier::Mutate(GeneratorBase * generator, Solution * solution, double probably)
 {
 	throw runtime_error("Not implemented");
 }
