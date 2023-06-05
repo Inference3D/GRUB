@@ -31,7 +31,7 @@ unique_ptr<GeneratorBase> GetGenerator(Mat& image, int offset);
 /**
  * @brief Confirm that evaluation is working correctly
  */
-TEST(Classifier_Test, evaluation_test)
+TEST(LearnWrapper_Test, evaluation_test)
 {
 	// Create the test images
 	Mat image_1 = Mat_<uchar>::zeros(100, 100); rectangle(image_1, Rect(10, 10, 80, 80), Scalar(1), FILLED);
@@ -39,15 +39,17 @@ TEST(Classifier_Test, evaluation_test)
 	auto data = vector<TestImage> { TestImage(0, image_1, 1), TestImage(1, image_2, 0) };
 
 	// Place the images into a database + Create an image loader
-	auto helper = PathHelper("database", "classifier_tests"); CreateDatabase(helper, data);
+	auto helper = PathHelper("database", "LearnWrapper_Tests"); CreateDatabase(helper, data);
 	auto loader = ImageLoader(helper, "classes.txt");
 
 	// Generate a solution
 	auto solution = BuildSolution(0, image_2);
 
-	// Perform an evaluation
-	auto evaluator = LearnWrapper(&loader);
-	auto error = evaluator.GetError(solution.get());
+	// Setup a learner
+	auto learner = LearnWrapper(&loader);
+
+	// Retrieve error
+	auto error = learner.GetError(solution.get());
 
 	// Check that the error is what was expected
 	ASSERT_EQ(error[0], 3600);
@@ -57,7 +59,7 @@ TEST(Classifier_Test, evaluation_test)
 /**
  * @brief Confirm that the representation is correct
  */
-TEST(Classifier_Test, string_representation)
+TEST(LearnWrapper_Test, string_representation)
 {
 	// Create the test images
 	Mat image_1 = Mat_<uchar>::zeros(100, 100); rectangle(image_1, Rect(10, 10, 80, 80), Scalar(1), FILLED);
@@ -65,15 +67,15 @@ TEST(Classifier_Test, string_representation)
 	auto data = vector<TestImage> { TestImage(0, image_1, 1), TestImage(1, image_2, 0) };
 
 	// Place the images into a database + Create an image loader
-	auto helper = PathHelper("database", "classifier_tests"); CreateDatabase(helper, data);
+	auto helper = PathHelper("database", "LearnWrapper_Tests"); CreateDatabase(helper, data);
 	auto loader = ImageLoader(helper, "classes.txt");
 
 	// Generate a solution
 	auto solution = BuildSolution(0, image_2);
 
 	// Convert solution to text
-	auto evaluator = LearnWrapper(&loader);
-	auto textSolution = evaluator.ToString(solution.get());
+	auto learner = LearnWrapper(&loader);
+	auto textSolution = learner.ToString(solution.get());
 
 	// Evaluate the solution
 	ASSERT_EQ(textSolution, "[Kernel:0]");
@@ -82,7 +84,7 @@ TEST(Classifier_Test, string_representation)
 /**
  * @brief Confirm the solution generation logic
  */
-TEST(Classifier_Test, solution_generation)
+TEST(LearnWrapper_Test, solution_generation)
 {
 	// Create the test images
 	Mat image_1 = Mat_<uchar>::zeros(100, 100); rectangle(image_1, Rect(10, 10, 80, 80), Scalar(1), FILLED);
@@ -91,15 +93,15 @@ TEST(Classifier_Test, solution_generation)
 	auto pixelCount = image_1.rows * image_1.cols;
 
 	// Place the images into a database + Create an image loader
-	auto helper = PathHelper("database", "classifier_tests"); CreateDatabase(helper, data);
+	auto helper = PathHelper("database", "LearnWrapper_Tests"); CreateDatabase(helper, data);
 	auto loader = ImageLoader(helper, "classes.txt");
 
-	// Create an evaluator
-	auto evaluator = LearnWrapper(&loader);
+	// Create an learner
+	auto learner = LearnWrapper(&loader);
 
 	// Perform solution creation
 	auto createGenerator = GetGenerator(image_1, 5);
-	auto solution = evaluator.Create(createGenerator.get(), 3);
+	auto solution = learner.Create(createGenerator.get(), 3);
 
 	// Verify the solution
 	ASSERT_EQ(solution->GetId(), 3);
@@ -111,7 +113,7 @@ TEST(Classifier_Test, solution_generation)
 	auto msequence = vector<int> { 1, 5, 20 }; auto mutateGenerator = SequenceGenerator(msequence);
 	
 	// Perform a mutation
-	auto didMutate = evaluator.Mutate(&mutateGenerator, solution, 0.5);
+	auto didMutate = learner.Mutate(&mutateGenerator, solution, 0.5);
 
 	// Confirm 
 	ASSERT_TRUE(didMutate);
@@ -119,6 +121,47 @@ TEST(Classifier_Test, solution_generation)
 
 	// Free the solution
 	delete solution;
+}
+
+/*
+ * Confirm that breeding operations are effective
+ */
+TEST(LearnWrapper_Test, breed_test)
+{
+	// Create the test images
+	Mat image_1 = Mat_<uchar>::zeros(100, 100); rectangle(image_1, Rect(10, 10, 80, 80), Scalar(1), FILLED);
+	Mat image_2 = InvertImage(image_1);
+	auto data = vector<TestImage> { TestImage(0, image_1, 1), TestImage(1, image_2, 0) };
+	auto pixelCount = image_1.rows * image_1.cols;
+
+	// Place the images into a database + Create an image loader
+	auto helper = PathHelper("database", "LearnWrapper_Tests"); CreateDatabase(helper, data);
+	auto loader = ImageLoader(helper, "classes.txt");
+
+	// Create an learner
+	auto learner = LearnWrapper(&loader);
+
+	// Create two solutions
+	auto solution_1 = Solution(1, vector<int> { 1, 2, 3, 4, 5 });
+	auto solution_2 = Solution(2, vector<int> { 6, 7, 8, 9, 10 });
+
+	// Create a generator
+	auto generator = SequenceGenerator(vector<int> {0, 1, 0, 1, 0});
+
+	// Create a child
+	auto child = learner.Breed(&generator, 3, &solution_1, &solution_2);
+
+	// Confirm the child values
+	ASSERT_EQ(child->GetId(), 3);
+
+	ASSERT_EQ(child->GetDna()[0], 1);
+	ASSERT_EQ(child->GetDna()[1], 7);
+	ASSERT_EQ(child->GetDna()[2], 3);
+	ASSERT_EQ(child->GetDna()[3], 9);
+	ASSERT_EQ(child->GetDna()[4], 5);
+
+	// Delete the child
+	delete child;
 }
 
 //--------------------------------------------------

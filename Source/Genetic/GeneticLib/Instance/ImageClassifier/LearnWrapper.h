@@ -32,6 +32,7 @@ namespace NVL_AI
 		virtual Vec2d GetError(Solution * solution) override;
 		virtual string ToString(Solution * solution) override;
 		virtual Solution * Create(GeneratorBase * generator, int solutionId) override;
+		virtual Solution * Breed(GeneratorBase * generator, int solutionId, Solution * mother, Solution * father) override;
 		virtual bool Mutate(GeneratorBase * generator, Solution * solution, double probably) override;
 	};
 }

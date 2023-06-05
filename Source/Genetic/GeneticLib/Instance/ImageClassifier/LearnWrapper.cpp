@@ -66,6 +66,23 @@ Solution * LearnWrapper::Create(GeneratorBase * generator, int solutionId)
 }
 
 //--------------------------------------------------
+// Breed
+//--------------------------------------------------
+
+/**
+ * @brief Add associated breed logic
+ * @param generator The generator that we are using
+ * @param solutionId The identifier to be given to the child
+ * @param mother The father node
+ * @param father The mother node
+ * @return Solution* The given solution
+ */
+Solution * LearnWrapper::Breed(GeneratorBase * generator, int solutionId, Solution * mother, Solution * father) 
+{
+	throw runtime_error("Not implemented");
+}
+
+//--------------------------------------------------
 // Mutate
 //--------------------------------------------------
 

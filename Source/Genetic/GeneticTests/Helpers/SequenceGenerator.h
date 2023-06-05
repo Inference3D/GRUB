@@ -22,8 +22,14 @@ namespace NVL_App
 		vector<int> _values;
 		int _position;
 	public:
-		SequenceGenerator(vector<int>& values) : _values(values), _position(0) {}
+		SequenceGenerator(const vector<int>& values) : _values(values), _position(0) {}
 
+		/**
+		 * @brief Retrieve elements in the sequence and throw errors if constraints are violated
+		 * @param min The minimum value that we are allowed
+		 * @param max  The maximum value that we are allowed
+		 * @return int The generated value
+		 */
 		virtual int Generate(int min, int max) override 
 		{
 			if (_position >= _values.size()) throw runtime_error("Sequence Generator ran out of expected tokens");
