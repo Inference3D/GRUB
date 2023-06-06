@@ -22,6 +22,15 @@ GeneticOperations::GeneticOperations(InstanceEngineBase * engine, GeneratorBase 
 {
 	_engine = engine;
 	_generator = generator;
+	_indexer = new Indexer();
+}
+
+/**
+ * @brief Main Terminator
+ */
+GeneticOperations::~GeneticOperations() 
+{
+	delete _indexer;
 }
 
 //--------------------------------------------------
@@ -34,7 +43,8 @@ GeneticOperations::GeneticOperations(InstanceEngineBase * engine, GeneratorBase 
  */
 Solution * GeneticOperations::Create()
 {
-	throw runtime_error("Not implemented");
+	auto solutionId = _indexer->Next();
+	return _engine->Create(_generator, solutionId);
 }
 
 /**
@@ -45,17 +55,19 @@ Solution * GeneticOperations::Create()
  */
 Solution * GeneticOperations::Breed(Solution * mother, Solution * father)
 {
-	throw runtime_error("Not implemented");
+	auto solutionId = _indexer->Next();
+	return _engine->Breed(_generator, solutionId, mother, father);
 }
 
 /**
  * @brief Mutate a given solution
  * @param solution The solution that we are mutating
+ * @param probability The probability that a mutation will occur
  * @return bool Returns a bool
  */
-bool GeneticOperations::Mutate(Solution * solution)
+bool GeneticOperations::Mutate(Solution * solution, double probability)
 {
-	throw runtime_error("Not implemented");
+	return _engine->Mutate(_generator, solution, probability);
 }
 
 //--------------------------------------------------
@@ -70,5 +82,20 @@ bool GeneticOperations::Mutate(Solution * solution)
  */
 Solution * GeneticOperations::Select(Population * population, int tournamentSize)
 {
-	throw runtime_error("Not implemented");
+	// Generate the first index
+	auto index = _generator->Generate(0, population->GetSolutionCount());
+
+	// Create a variable to hold the result
+	auto result = population->GetSolutions()[index];
+
+	// Try out some other options
+	for (auto i = 0; i < tournamentSize - 1; i++) 
+	{
+		index = _generator->Generate(0, population->GetSolutionCount());
+		auto option = population->GetSolutions()[index];
+		if (option->GetError() < result->GetError()) result = option;
+	}
+
+	// Return the result that was found
+	return result;
 }

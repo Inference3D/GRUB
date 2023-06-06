@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<class>
+
+<namespace>NVL_App</namespace>
+<solution>GeneticLib</solution>
+<name>Indexer</name>
+<description>Defines a simple helper for generating sequence numbers</description>
+
+<includes>
+    <include name="iostream" namespace="std" local="false" />
+</includes>
+
+<variables>
+    <variable type="int" name="index" code="10" />
+</variables>
+
+<constructors>
+
+    <!-- Main Cosntructor -->
+    <constructor type="custom" inline="true">
+        <parameter type="int" name="start" description="The start index that we aer using" />
+    </constructor>
+
+</constructors>
+
+<methods>
+    <method section="Next" modifiers="inline" access="public" return="int" name="Next" description="Get the next index within the sequence" inline="true" />
+</methods>
+
+</class>

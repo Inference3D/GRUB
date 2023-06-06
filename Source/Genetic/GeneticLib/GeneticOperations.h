@@ -15,6 +15,8 @@ using namespace std;
 using namespace cv;
 
 #include "Tools/GeneratorBase.h"
+#include "Tools/Indexer.h"
+
 #include "InstanceEngineBase.h"
 #include "Population.h"
 
@@ -25,12 +27,14 @@ namespace NVL_App
 	private:
 		InstanceEngineBase * _engine;
 		GeneratorBase * _generator;
+		Indexer * _indexer;
 	public:
 		GeneticOperations(InstanceEngineBase * engine, GeneratorBase * generator);
+		virtual ~GeneticOperations();
 
 		Solution * Create();
 		Solution * Breed(Solution * mother, Solution * father);
-		bool Mutate(Solution * solution);
+		bool Mutate(Solution * solution, double probability);
 
 		Solution * Select(Population * population, int tournamentSize);
 	};
