@@ -3,4 +3,8 @@
     <database>"/home/trevor/MLData"</database>
     <dataset>"SimpleShapes"</dataset>
     <class_file>triangle.txt</class_file>
+    <population_size>"100"</population_size>
+    <tournament_size>"10"</tournament_size>
+    <mutation_probability>"0.2"</mutation_probability>
+    <elite_count>"5"</elite_count>
 </opencv_storage>

@@ -14,6 +14,7 @@ using namespace std;
 #include <NVLib/Logger.h>
 
 #include <GeneticLib/ArgUtils.h>
+#include <GeneticLib/GeneticParameters.h>
 #include <GeneticLib/Tools/ImageLoader.h>
 
 namespace NVL_App
@@ -24,6 +25,7 @@ namespace NVL_App
 		NVLib::Parameters * _parameters;
 		NVLib::Logger* _logger;
 		ImageLoader * _loader;
+		GeneticParameters * _learningArguments;
 	public:
 		Engine(NVLib::Logger* logger, NVLib::Parameters * parameters);
 		~Engine();
