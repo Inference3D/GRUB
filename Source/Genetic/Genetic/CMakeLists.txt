@@ -7,7 +7,7 @@
 #--------------------------------------------------------
 
 # Setup the includes
-include_directories("../")
+include_directories("../" "../GeneticLib")
 
 # Create the executable
 add_executable(Genetic

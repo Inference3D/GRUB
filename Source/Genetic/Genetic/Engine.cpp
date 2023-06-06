@@ -37,6 +37,9 @@ Engine::Engine(NVLib::Logger* logger, NVLib::Parameters* parameters)
 
     logger->Log(1, "Setting up an image loader");
     _loader = new ImageLoader(helper, classFile);
+
+    logger->Log(1, "Creating a learning wrapper");
+    _learningWrapper = new NVL_AI::LearnWrapper(_loader);
 }
 
 /**
@@ -47,6 +50,7 @@ Engine::~Engine()
     delete _parameters;
     delete _loader;
     delete _learningArguments;
+    delete _learningWrapper;
 }
 
 //--------------------------------------------------
