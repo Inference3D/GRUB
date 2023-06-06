@@ -50,5 +50,5 @@ double Kernel::Evaluate(Mat& image)
 	Mat floatImage; image.convertTo(floatImage, CV_32F);
 	Mat partial; multiply(_weights, floatImage, partial);
 	auto total = sum(partial);
-	return total[0] + _offset;
+	return abs(total[0] + _offset);
 }

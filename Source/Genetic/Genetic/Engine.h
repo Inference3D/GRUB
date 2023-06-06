@@ -16,6 +16,7 @@ using namespace std;
 #include <GeneticLib/ArgUtils.h>
 #include <GeneticLib/GeneticParameters.h>
 #include <GeneticLib/Tools/ImageLoader.h>
+#include <GeneticLib/GeneticEngine.h>
 #include <GeneticLib/Instance/ImageClassifier/LearnWrapper.h>
 
 namespace NVL_App
@@ -28,6 +29,7 @@ namespace NVL_App
 		ImageLoader * _loader;
 		GeneticParameters * _learningArguments;
 		NVL_AI::LearnWrapper * _learningWrapper;
+		GeneticEngine * _learner;
 	public:
 		Engine(NVLib::Logger* logger, NVLib::Parameters * parameters);
 		~Engine();

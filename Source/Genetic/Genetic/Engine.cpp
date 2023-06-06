@@ -33,13 +33,18 @@ Engine::Engine(NVLib::Logger* logger, NVLib::Parameters* parameters)
     auto tournamentSize = ArgUtils::GetInteger(parameters, "tournament_size");
     auto mutationProbability = ArgUtils::GetDouble(parameters, "mutation_probability");
     auto eliteCount = ArgUtils::GetInteger(parameters, "elite_count");
-    _learningArguments = new GeneticParameters(populationSize, tournamentSize, mutationProbability, eliteCount);
+    auto errorType = ArgUtils::GetInteger(parameters, "error_type");
+    auto maxIterations = ArgUtils::GetInteger(parameters, "max_iterations");
+    _learningArguments = new GeneticParameters(populationSize, tournamentSize, mutationProbability, eliteCount, errorType, maxIterations);
 
     logger->Log(1, "Setting up an image loader");
     _loader = new ImageLoader(helper, classFile);
 
     logger->Log(1, "Creating a learning wrapper");
     _learningWrapper = new NVL_AI::LearnWrapper(_loader);
+
+    logger->Log(1, "Creating an instance of a given learner");
+    _learner = new GeneticEngine(_learningArguments, _learningWrapper);
 }
 
 /**
@@ -51,6 +56,7 @@ Engine::~Engine()
     delete _loader;
     delete _learningArguments;
     delete _learningWrapper;
+    delete _learner;
 }
 
 //--------------------------------------------------
@@ -62,10 +68,24 @@ Engine::~Engine()
  */
 void Engine::Run()
 {
-    while (true) 
+    _logger->Log(1, "Generating initial solutions");
+    _learner->Initialize();
+
+    _logger->StartFunction("Solution Refinement");
+    for (auto i = 0; i < _learningArguments->GetMaxIterations(); i++) 
     {
-        auto dataPoint = _loader->Next();
-        if (dataPoint.get() == nullptr) break;
-        imshow("image", dataPoint->GetImage()); waitKey();
+        _logger->Log(1, "Processing Epoch: %i", i);
+
+        _logger->Log(1, "Evaluating Solutions");
+        auto bestSolution = _learner->EvaluateSolutions();
+        _logger->Log(1, "Best Score: %f", bestSolution->GetError());
+
+        if (bestSolution->GetError() == 0) 
+        {
+            _logger->Log(1, "The problem appears to have been solved! Quitting...");
+            break;
+        }
     }
+
+    _logger->StopFunction();
 }

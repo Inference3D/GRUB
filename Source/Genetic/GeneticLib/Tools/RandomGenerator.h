@@ -13,9 +13,11 @@ using namespace std;
 
 #include <NVLib/RandomUtils.h>
 
+#include "GeneratorBase.h"
+
 namespace NVL_App
 {
-	class RandomGenerator
+	class RandomGenerator : public GeneratorBase
 	{
 	public:
 		RandomGenerator() { NVLib::RandomUtils::TimeSeedRandomNumbers(); }

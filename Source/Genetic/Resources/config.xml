@@ -7,4 +7,6 @@
     <tournament_size>"10"</tournament_size>
     <mutation_probability>"0.2"</mutation_probability>
     <elite_count>"5"</elite_count>
+    <error_type>"0"</error_type>
+    <max_iterations>"1"</max_iterations>
 </opencv_storage>
