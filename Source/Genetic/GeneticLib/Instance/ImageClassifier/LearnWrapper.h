@@ -26,7 +26,7 @@ using namespace NVL_App;
 
 namespace NVL_AI
 {
-	class LearnWrapper : public InstanceEngineBase
+	class LearnWrapper : public NVL_App::InstanceEngineBase
 	{
 	private:
 		ImageLoader * _loader;

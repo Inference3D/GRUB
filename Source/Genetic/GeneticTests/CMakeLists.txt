@@ -26,7 +26,9 @@ add_executable (GeneticTests
 	Tests/ImageLoader_Tests.cpp
 	Tests/Kernel_Tests.cpp
 	Tests/LearnWrapper_Tests.cpp
+	Tests/GeneticOperations_Tests.cpp
 )
+
 
 # Add link libraries
 target_link_libraries(GeneticTests GeneticLib NVLib ${OpenCV_LIBS} UnitTestLib OpenSSL::SSL uuid GTest::Main)

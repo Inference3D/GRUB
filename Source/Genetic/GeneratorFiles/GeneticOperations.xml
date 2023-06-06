@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+
+<class>
+
+<namespace>NVL_App</namespace>
+<solution>GeneticLib</solution>
+<name>GeneticOperations</name>
+<description>The operations that we will use for genetic programming</description>
+
+<includes>
+    <include name="iostream" namespace="std" local="false" />
+    <include name="opencv2/opencv.hpp" namespace="cv" local="false" />
+    <include name="Tools/GeneratorBase.h" local="true" />
+    <include name="InstanceEngineBase.h" local="true" />
+    <include name="Population.h" local="true" />
+</includes>
+
+<variables>
+    <variable type="InstanceEngineBase *" name="engine" code="00" />
+    <variable type="GeneratorBase *" name="generator" code="00" />
+</variables>
+
+<constructors>
+
+    <!-- Main Constructor -->
+    <constructor type="auto" inline="false" />
+
+</constructors>
+
+<methods>
+
+    <!-- Create a new solution -->
+    <method section="Create Solution" access="public" return="Solution *" name="Create" description="Generate a new solution" inline="false" />
+
+    <!-- Breed a new solution -->
+    <method section="Create Solution" access="public" return="Solution *" name="Breed" description="Breed a new solution" inline="false">
+        <parameter type="Solution *" name="mother" description="The mother solution that we are breeding from" />
+        <paraemter type="Solution *" name="father" description="The father solution that we are breeding from" />
+    </method>
+
+    <!-- Mutate a solution -->
+    <method section="Create Solution" access="public" return="bool" name="Mutate" description="Mutate a given solution" inline="false">
+        <parameter type="Solution *" name="solution" description="The solution that we are mutating" />
+    </method>
+
+    <!-- Select a solution -->
+    <method section="Select Solution" access="public" return="Solution *" name="Select" description="Select a solution from the population (using tournament select)" inline="false">
+        <parameter type="Population *" name="population" description="The population that we are selecting from" />
+        <parameter type="int" name="tournamentSize" description="The size of the tournament that we aer selecting for" />
+    </method>
+
+</methods>
+
+<tests>
+    <test name="tournament_select" description="Confirm the tournament select operation" exception="false" />
+</tests> 
+
+</class>

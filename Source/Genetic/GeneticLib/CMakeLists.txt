@@ -17,5 +17,7 @@ add_library (GeneticLib STATIC
 	Instance/ImageClassifier/Kernel.cpp
 	ArgUtils.cpp
 	Population.cpp
+	GeneticOperations.cpp
 )
+
 	
