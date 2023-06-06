@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+
+<class terminator="true">
+
+<namespace>NVL_App</namespace>
+<solution>GeneticLib</solution>
+<name>GeneticEngine</name>
+<description>An engine for performing genetic programming</description>
+
+<includes>
+    <include name="iostream" namespace="std" local="false" />
+    <include name="opencv2/opencv.hpp" namespace="cv" local="false" />
+    <include name="GeneticOperations.h" local="true" />
+    <include name="GeneticParameters.h" local="true" />
+    <include name="Population.h" local="true" />
+</includes>
+
+<variables>
+    <variable type="Population *" name="population" code="10" />
+    <variable type="GeneticParameters *" name="parameters" code="10" />
+</variables>
+
+<constructors>
+
+    <!-- Main Constructor -->
+    <constructor type="custom" inline="false">
+        <parameter type="GeneticParameters *" name="parameters" description="The parameters that we dealing with" />
+        <parameter type="InstanceEngineBase *" name="engine" description="The engine that we using to evaluate solutions" />
+    </constructor>
+
+</constructors>
+
+<methods>
+
+    <!-- Add a main initializer -->
+    <method section="Initialize" access="public" return="void" name="Initialize" description="Add associated initializer logic" inline="false" />
+
+    <!-- Perform a round of refinement -->
+    <method section="Refinement" access="public" return="Solution *" name="Refine" description="Add refinement logic to the system" inline="false" />
+
+</methods>
+
+</class>

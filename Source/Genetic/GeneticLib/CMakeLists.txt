@@ -18,6 +18,5 @@ add_library (GeneticLib STATIC
 	ArgUtils.cpp
 	Population.cpp
 	GeneticOperations.cpp
+	GeneticEngine.cpp
 )
-
-	
