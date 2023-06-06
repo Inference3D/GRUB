@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+
+<class terminator="true">
+
+<namespace>NVL_App</namespace>
+<solution>GeneticLib</solution>
+<name>GeneticEngine</name>
+<description>An engine for performing genetic programming</description>
+
+<includes>
+    <include name="iostream" namespace="std" local="false" />
+</includes>
+
+<variables>
+    <variable type="" name="" code="" />
+</variables>
+
+<constructors>
+    <constructor type="custom" inline="false">
+        <parameter type="" name="" description="" />
+    </constructor>
+</constructors>
+
+<methods>
+    <method section="" modifiers="" access="" return="" name="" description="" inline="">
+        <parameter type="" name="" description="" />
+    </method>    
+</methods>
+
+<tests>
+    <test name="" description="" exception="false" />
+</tests> 
+
+</class>
