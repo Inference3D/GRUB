@@ -16,10 +16,11 @@ using namespace NVL_AI;
 /**
  * @brief Custom Constructor
  * @param loader Defines an image loader for the system
+ * @param kernelSize The size of the kernel that we are working with
  */
-LearnWrapper::LearnWrapper(ImageLoader * loader)
+LearnWrapper::LearnWrapper(ImageLoader * loader, int kernelSize) : _loader(loader), _kernelSize(kernelSize)
 {
-	throw runtime_error("Not implemented");
+	// Extra implementation can go here
 }
 
 //--------------------------------------------------
@@ -33,7 +34,34 @@ LearnWrapper::LearnWrapper(ImageLoader * loader)
  */
 Vec2d LearnWrapper::GetError(Solution * solution)
 {
-	throw runtime_error("Not implemented");
+	// Create the kernel
+	auto kernel =  Kernel(solution);
+
+	// Create a variable to determine score
+	auto result = Vec2d();
+
+	// Reset the loader
+	_loader->Reset();
+
+	while (true) 
+	{
+		// Retrieve the next test (if it exists)
+		auto test = _loader->Next();
+		if (test.get() == nullptr) break;
+
+		// Perform the test
+		auto score = kernel.Evaluate(test->GetImage());
+
+		// Determine the classification and classification difference
+		auto classification = score > 0.5 ? 0 : 1;
+		auto counter = classification == test->GetImageType() ? 0 : 1;
+
+		// Perform the update
+		result[0] += score; result[1] += counter;
+	}
+
+	// Return the result
+	return result;
 }
 
 //--------------------------------------------------
@@ -42,12 +70,12 @@ Vec2d LearnWrapper::GetError(Solution * solution)
 
 /**
  * @brief Retrieve a string representation
- * @param  
+ * @param solution The solution that we are working with
  * @return string Returns a string
  */
-string LearnWrapper::ToString(Solution * )
+string LearnWrapper::ToString(Solution * solution)
 {
-	throw runtime_error("Not implemented");
+	return NVLib::Formatter() << "[kernel:" << solution->GetId() << "]";
 }
 
 //--------------------------------------------------
@@ -62,7 +90,18 @@ string LearnWrapper::ToString(Solution * )
  */
 Solution * LearnWrapper::Create(GeneratorBase * generator, int solutionId)
 {
-	throw runtime_error("Not implemented");
+	// Create the "DNA" for the solution
+	auto dna = vector<int>(); auto pixelCount = _kernelSize * _kernelSize; 
+	for (auto i = 0; i < pixelCount; i++) dna.push_back(generator->Generate(-1000, 1000));
+
+	// Add the scale factor
+	dna.push_back(1e4);
+
+	// Add the offset
+	dna.push_back(generator->Generate(-1000, 1000));
+
+	// Return the solution
+	return new Solution(solutionId, dna);
 }
 
 //--------------------------------------------------
@@ -79,7 +118,23 @@ Solution * LearnWrapper::Create(GeneratorBase * generator, int solutionId)
  */
 Solution * LearnWrapper::Breed(GeneratorBase * generator, int solutionId, Solution * mother, Solution * father) 
 {
-	throw runtime_error("Not implemented");
+	// Perform validations
+	assert(mother->GetDna().size() > 0); // There needs to be some DNA entries in the data
+	assert(mother->GetDna().size() == father->GetDna().size()); // The father and mother need to have the same set size
+
+	// Create a variable to hold the child DNA
+	auto dna = vector<int>();
+
+	// Perform the population of the DNA
+	for (auto i = 0; i < mother->GetDna().size(); i++) 
+	{
+		auto selection = generator->Generate(0, 2);
+		auto value = selection == 0 ? mother->GetDna()[i] : father->GetDna()[i];
+		dna.push_back(value);
+	}
+
+	// Return the new solution
+	return new Solution(solutionId, dna);
 }
 
 //--------------------------------------------------
@@ -90,10 +145,25 @@ Solution * LearnWrapper::Breed(GeneratorBase * generator, int solutionId, Soluti
  * @brief Mutate solutions
  * @param generator A source of random numbers
  * @param solution The solution that is potentially mutate
- * @param probably The probably that the solution will be mutated
+ * @param probability The probability that the solution will be mutated
  * @return An indication whether the solution was mutated or not
  */
-bool LearnWrapper::Mutate(GeneratorBase * generator, Solution * solution, double probably)
+bool LearnWrapper::Mutate(GeneratorBase * generator, Solution * solution, double probability)
 {
-	throw runtime_error("Not implemented");
+	// Determine if a mutation should occur?
+	auto spin = generator->Generate(0, 100);
+	auto threshold = 100 * probability;
+	if (spin > threshold) return false;
+
+	// Select the attribute to change
+	auto attributeIndex = generator->Generate(0, solution->GetDna().size() - 1);
+
+	// Get the new attribute value
+	auto value = generator->Generate(-1000, 1000);
+
+	// Perform the update
+	solution->GetDna()[attributeIndex] = value;
+
+	// Mutation was successfully performed
+	return true;
 }

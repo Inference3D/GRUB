@@ -14,11 +14,15 @@ using namespace std;
 #include <opencv2/opencv.hpp>
 using namespace cv;
 
+#include <NVLib/Formatter.h>
+
 #include "Tools/GeneratorBase.h"
 #include "Tools/ImageLoader.h"
 #include "InstanceEngineBase.h"
 #include "Solution.h"
 using namespace NVL_App;
+
+#include "Kernel.h"
 
 namespace NVL_AI
 {
@@ -26,8 +30,9 @@ namespace NVL_AI
 	{
 	private:
 		ImageLoader * _loader;
+		int _kernelSize;
 	public:
-		LearnWrapper(ImageLoader * loader);
+		LearnWrapper(ImageLoader * loader, int kernelSize = 100);
 
 		virtual Vec2d GetError(Solution * solution) override;
 		virtual string ToString(Solution * solution) override;

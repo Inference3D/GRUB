@@ -78,7 +78,7 @@ TEST(LearnWrapper_Test, string_representation)
 	auto textSolution = learner.ToString(solution.get());
 
 	// Evaluate the solution
-	ASSERT_EQ(textSolution, "[Kernel:0]");
+	ASSERT_EQ(textSolution, "[kernel:0]");
 }
 
 /**
@@ -106,7 +106,7 @@ TEST(LearnWrapper_Test, solution_generation)
 	// Verify the solution
 	ASSERT_EQ(solution->GetId(), 3);
 	for (auto i = 0; i < pixelCount; i++) ASSERT_EQ(solution->GetDna()[i], image_1.data[i]);
-	ASSERT_EQ(solution->GetDna()[pixelCount], 1); // Test the scaling factor
+	ASSERT_EQ(solution->GetDna()[pixelCount], 1e4); // Test the scaling factor
 	ASSERT_EQ(solution->GetDna()[pixelCount + 1], 5); // Test the offset
 
 	// Create a mutation generator
@@ -257,7 +257,7 @@ unique_ptr<GeneratorBase> GetGenerator(Mat& image, int offset)
 	for (auto i = 0; i < pixelCount; i++) sequence.push_back(image.data[i]);
 
 	// Add the scale factor the sequence
-	sequence.push_back(1);
+	// sequence.push_back(1); --> This is a default value and should enable a floating point
 
 	// Add the offset to the sequence
 	sequence.push_back(offset);
