@@ -103,6 +103,10 @@ void Engine::Run()
     auto score1 = kernel.Evaluate(_loader->Next()->GetImage());
     auto score2 = kernel.Evaluate(_loader->Next()->GetImage());
     auto score3 = kernel.Evaluate(_loader->Next()->GetImage());
+
+    _logger->Log(1, "Score 1: %f", score1);
+    _logger->Log(1, "Score 2: %f", score2);
+    _logger->Log(1, "Score 3: %f", score3);
     ////////////////////// TESTING //////////////////////////////////////////////
 
     _logger->Log(1, "Writing result to disk");
