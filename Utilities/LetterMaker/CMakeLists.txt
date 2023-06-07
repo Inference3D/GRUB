@@ -15,7 +15,7 @@ set(LIBRARY_BASE "/home/trevor/Libraries")
 # Set the C++ standard
 set(CMAKE_CXX_STANDARD 17)
 
-# Add opencv to the solution
+# Add OpenCV to the solution
 find_package( OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
@@ -29,6 +29,7 @@ set_target_properties(NVLib PROPERTIES
 # Create the executable
 add_executable(LetterMaker
     Source.cpp
+    PathHelper.cpp
 )
 
 # Add link libraries                               

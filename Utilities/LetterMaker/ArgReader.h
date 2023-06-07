@@ -114,11 +114,9 @@ namespace NVL_Utils
         inline static string GetParamKeys() 
         {
             const char * keys = 
-                "{ help h usage ? |                       | Show help message                            }"
-                "{ input          | Input                 | The folder containing the input files        }"
-                "{ output         | Output                | The folder containing the output files       }"
-                "{ filename       | card                  | Image template name --> [@fileName]_<id>.png }"
-                "{ count          | 3                     | The location of the output folder            }"; 
+                "{ help h usage ? |                       | Show help message                                         }"
+                "{ database       | /home/trevor/MLData   | The location of the database within the system            }"
+                "{ dataset        | letters_0000          | The folder containing the output files                    }";
 
             return string(keys);
         }
