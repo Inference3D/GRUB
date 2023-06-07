@@ -56,7 +56,7 @@ Vec2d LearnWrapper::GetError(Solution * solution)
 		auto classification = score > 50 ? 0 : 1;
 		auto counter = classification == test->GetImageType() ? 0 : 1;
 
-		auto error = test->GetImageType() == 0 ? abs(100 - score) : score;
+		auto error = test->GetImageType() == 0 ? abs(100 - score) : abs(score + 100);
 
 		// Perform the update
 		result[0] += error; result[1] += counter;
