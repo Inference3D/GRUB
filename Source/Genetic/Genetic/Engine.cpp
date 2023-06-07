@@ -98,15 +98,18 @@ void Engine::Run()
     _logger->Log(1, "Final best solution score: %f", bestSolution->GetError());
 
     ////////////////////// TESTING //////////////////////////////////////////////
+
     auto kernel = NVL_AI::Kernel(bestSolution);
     _loader->Reset();
-    auto score1 = kernel.Evaluate(_loader->Next()->GetImage());
-    auto score2 = kernel.Evaluate(_loader->Next()->GetImage());
-    auto score3 = kernel.Evaluate(_loader->Next()->GetImage());
 
-    _logger->Log(1, "Score 1: %f", score1);
-    _logger->Log(1, "Score 2: %f", score2);
-    _logger->Log(1, "Score 3: %f", score3);
+    while (true) 
+    {
+        auto dataPoint = _loader->Next();
+        if (dataPoint.get() == nullptr) break;
+        auto score = kernel.Evaluate(dataPoint->GetImage());
+        _logger->Log(1, "Score %i: %f", dataPoint->GetId(), score);
+    }
+
     ////////////////////// TESTING //////////////////////////////////////////////
 
     _logger->Log(1, "Writing result to disk");
