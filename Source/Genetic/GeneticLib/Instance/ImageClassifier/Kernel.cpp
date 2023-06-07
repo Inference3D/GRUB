@@ -29,7 +29,6 @@ Kernel::Kernel(Solution * solution)
 
 	// Retrieve the scale variables
 	auto scale = (float) solution->GetDna()[count];
-	_offset = solution->GetDna()[count + 1];
 
 	// Clear the DNA the variables
 	auto pixelCount = _weights.cols * _weights.rows;
@@ -50,5 +49,5 @@ double Kernel::Evaluate(Mat& image)
 	Mat floatImage; image.convertTo(floatImage, CV_32F);
 	Mat partial; multiply(_weights, floatImage, partial);
 	auto total = sum(partial);
-	return abs(total[0] + _offset);
+	return abs(total[0]);
 }

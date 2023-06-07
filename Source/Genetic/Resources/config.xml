@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <opencv_storage>
     <database>"/home/trevor/MLData"</database>
-    <dataset>"SimpleShapes"</dataset>
+    <dataset>"shapes_0000"</dataset>
     <class_file>triangle.txt</class_file>
     <population_size>"500"</population_size>
     <tournament_size>"10"</tournament_size>
     <mutation_probability>"0.2"</mutation_probability>
     <elite_count>"5"</elite_count>
     <error_type>"0"</error_type>
-    <max_iterations>"2000"</max_iterations>
+    <max_iterations>"100"</max_iterations>
 </opencv_storage>

@@ -94,13 +94,13 @@ Solution * LearnWrapper::Create(GeneratorBase * generator, int solutionId)
 {
 	// Create the "DNA" for the solution
 	auto dna = vector<int>(); auto pixelCount = _kernelSize * _kernelSize; 
-	for (auto i = 0; i < pixelCount; i++) dna.push_back(generator->Generate(0, 1000));
+	for (auto i = 0; i < pixelCount; i++) dna.push_back(generator->Generate(-1000, 1000));
 
 	// Add the scale factor
 	dna.push_back(1e4);
 
 	// Add the offset
-	dna.push_back(generator->Generate(0, 1000));
+	dna.push_back(0 /*generator->Generate(-1000, 1000)*/ );
 
 	// Return the solution
 	return new Solution(solutionId, dna);

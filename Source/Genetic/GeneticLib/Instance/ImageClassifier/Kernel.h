@@ -23,13 +23,11 @@ namespace NVL_AI
 	{
 	private:
 		Mat _weights;
-		double _offset;
 	public:
 		Kernel(Solution * solution);
 
 		double Evaluate(Mat& image);
 
 		inline Mat& GetWeights() { return _weights; }
-		inline double& GetOffset() { return _offset; }
 	};
 }
