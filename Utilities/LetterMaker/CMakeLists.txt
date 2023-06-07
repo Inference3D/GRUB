@@ -19,6 +19,10 @@ set(CMAKE_CXX_STANDARD 17)
 find_package( OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
+# Add OpenSSL to the solution
+find_package(OpenSSL REQUIRED)
+
+
 # Add the NVLib library to the folder
 add_library(NVLib STATIC IMPORTED)
 set_target_properties(NVLib PROPERTIES
@@ -33,7 +37,7 @@ add_executable(LetterMaker
 )
 
 # Add link libraries                               
-target_link_libraries(LetterMaker NVLib ${OpenCV_LIBS} )
+target_link_libraries(LetterMaker NVLib ${OpenCV_LIBS} OpenSSL::SSL uuid )
 
 # Copy Resources across
 add_custom_target(resource_copy ALL

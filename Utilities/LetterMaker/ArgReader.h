@@ -42,10 +42,8 @@ namespace NVL_Utils
 
             auto parameters = new NVLib::Parameters();
 
-            parameters->Add("input", parser.get<String>("input"));
-            parameters->Add("output", parser.get<String>("output"));
-            parameters->Add("filename", parser.get<String>("filename"));
-            parameters->Add("count", parser.get<String>("count"));
+            parameters->Add("database", parser.get<String>("database"));
+            parameters->Add("dataset", parser.get<String>("dataset"));
 
             return parameters;
         }        
