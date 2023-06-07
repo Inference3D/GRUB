@@ -22,6 +22,7 @@ namespace NVL_App
 		double _error;
 	public:
 		Solution(int id, const vector<int>& dna) : _id(id), _dna(dna), _error(-1) {}
+		Solution(Solution * solution) : _id(solution->_id), _dna(solution->GetDna()), _error(solution->GetError()) {}
 
 		inline int& GetId() { return _id; }
 		inline vector<int>& GetDna() { return _dna; }

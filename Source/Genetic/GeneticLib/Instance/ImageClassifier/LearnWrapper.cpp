@@ -53,11 +53,13 @@ Vec2d LearnWrapper::GetError(Solution * solution)
 		auto score = kernel.Evaluate(test->GetImage());
 
 		// Determine the classification and classification difference
-		auto classification = score > 0.5 ? 0 : 1;
+		auto classification = score > 50 ? 0 : 1;
 		auto counter = classification == test->GetImageType() ? 0 : 1;
 
+		auto error = test->GetImageType() == 0 ? abs(100 - score) : score;
+
 		// Perform the update
-		result[0] += score; result[1] += counter;
+		result[0] += error; result[1] += counter;
 	}
 
 	// Return the result
@@ -92,13 +94,13 @@ Solution * LearnWrapper::Create(GeneratorBase * generator, int solutionId)
 {
 	// Create the "DNA" for the solution
 	auto dna = vector<int>(); auto pixelCount = _kernelSize * _kernelSize; 
-	for (auto i = 0; i < pixelCount; i++) dna.push_back(generator->Generate(-1000, 1000));
+	for (auto i = 0; i < pixelCount; i++) dna.push_back(generator->Generate(0, 1000));
 
 	// Add the scale factor
 	dna.push_back(1e4);
 
 	// Add the offset
-	dna.push_back(generator->Generate(-1000, 1000));
+	dna.push_back(generator->Generate(0, 1000));
 
 	// Return the solution
 	return new Solution(solutionId, dna);

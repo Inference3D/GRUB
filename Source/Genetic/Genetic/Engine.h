@@ -12,6 +12,7 @@
 using namespace std;
 
 #include <NVLib/Logger.h>
+#include <NVLib/DisplayUtils.h>
 
 #include <GeneticLib/ArgUtils.h>
 #include <GeneticLib/GeneticParameters.h>

@@ -29,7 +29,7 @@ namespace NVL_App
 		Population * _population;
 		GeneticParameters * _parameters;
 		InstanceEngineBase * _engine;
-		Indexer * _indexer;
+		GeneticOperations * _operations;
 		GeneratorBase * _generator;
 	public:
 		GeneticEngine(GeneticParameters * parameters, InstanceEngineBase * engine);
@@ -37,7 +37,7 @@ namespace NVL_App
 
 		void Initialize();
 		Solution * EvaluateSolutions();
-		Solution * Refine();
+		void SpawnNew();
 
 		inline Population * GetPopulation() { return _population; }
 	};

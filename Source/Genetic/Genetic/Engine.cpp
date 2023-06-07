@@ -85,7 +85,26 @@ void Engine::Run()
             _logger->Log(1, "The problem appears to have been solved! Quitting...");
             break;
         }
+
+        _logger->Log(1, "Spawning the next generation");
+        _learner->SpawnNew();
     }
 
     _logger->StopFunction();
+
+    _logger->Log(1, "Evaluate the final generation");
+    auto bestSolution = _learner->EvaluateSolutions();
+
+    _logger->Log(1, "Final best solution score: %f", bestSolution->GetError());
+
+    ////////////////////// TESTING //////////////////////////////////////////////
+    auto kernel = NVL_AI::Kernel(bestSolution);
+    _loader->Reset();
+    auto score1 = kernel.Evaluate(_loader->Next()->GetImage());
+    auto score2 = kernel.Evaluate(_loader->Next()->GetImage());
+    auto score3 = kernel.Evaluate(_loader->Next()->GetImage());
+    ////////////////////// TESTING //////////////////////////////////////////////
+
+    _logger->Log(1, "Writing result to disk");
+    imwrite("solution.tiff", kernel.GetWeights());
 }

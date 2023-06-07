@@ -20,8 +20,8 @@ using namespace NVL_App;
  */
 GeneticEngine::GeneticEngine(GeneticParameters * parameters, InstanceEngineBase * engine) : _parameters(parameters), _engine(engine), _population(nullptr)
 {
-	_indexer = new Indexer();
 	_generator = new RandomGenerator();
+	_operations = new GeneticOperations(_engine, _generator);
 }
 
 /**
@@ -30,7 +30,7 @@ GeneticEngine::GeneticEngine(GeneticParameters * parameters, InstanceEngineBase 
 GeneticEngine::~GeneticEngine()
 {
 	if (_population != nullptr) delete _population;
-	delete _indexer;
+	delete _operations;
 	delete _generator;
 }
 
@@ -53,8 +53,7 @@ void GeneticEngine::Initialize()
 	// Create the associated solutions
 	for (auto i = 0; i < _parameters->GetPopulationSize(); i++) 
 	{
-		auto solutionId = _indexer->Next();
-		auto solution = _engine->Create(_generator, solutionId);
+		auto solution = _operations->Create();
 		_population->AddSolution(solution);
 	}
 }
@@ -83,12 +82,28 @@ Solution * GeneticEngine::EvaluateSolutions()
 	return bestSolution;
 }
 
-
 /**
- * @brief Add refinement logic to the system
- * @return Solution * Returns a Solution *
+ * @brief Add the logic to spawn the next generation
  */
-Solution * GeneticEngine::Refine()
+void GeneticEngine::SpawnNew()
 {
-	throw runtime_error("Not implemented");
+	// Create the next population
+	auto nextPopulation = new Population();
+
+	// Add the elitism variables
+	auto topSolutions = vector<Solution *>(); _population->GetTopSolutions(_parameters->GetEliteCount(), topSolutions);
+	for (auto solution : topSolutions) nextPopulation->AddSolution(new Solution(solution));
+
+	// Use breeding to add the remainder of solutions 
+	while (nextPopulation->GetSolutionCount() < _parameters->GetPopulationSize()) 
+	{
+		auto mother = _operations->Select(_population, _parameters->GetTournamentSize());
+		auto father = _operations->Select(_population, _parameters->GetTournamentSize());
+		auto child = _operations->Breed(mother, father);
+		_operations->Mutate(child, _parameters->GetMutationProbability());
+		nextPopulation->AddSolution(child);
+	}
+
+	// Swap the populations
+	delete _population; _population = nextPopulation;
 }
