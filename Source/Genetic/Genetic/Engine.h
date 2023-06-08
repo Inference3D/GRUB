@@ -13,6 +13,7 @@ using namespace std;
 
 #include <NVLib/Logger.h>
 #include <NVLib/DisplayUtils.h>
+#include <NVLib/Graphics/Graph.h>
 
 #include <GeneticLib/ArgUtils.h>
 #include <GeneticLib/GeneticParameters.h>

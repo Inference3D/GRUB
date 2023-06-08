@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <opencv_storage>
     <database>"/home/trevor/MLData"</database>
-    <dataset>"letters_0000"</dataset>
-    <class_file>classes.txt</class_file>
+    <dataset>"hand_0000"</dataset>
+    <class_file>class.txt</class_file>
     <population_size>"500"</population_size>
     <tournament_size>"10"</tournament_size>
     <mutation_probability>"0.2"</mutation_probability>
