@@ -56,7 +56,7 @@ Vec2d LearnWrapper::GetError(Solution * solution)
 		auto classification = score > 50 ? 0 : 1;
 		auto counter = classification == test->GetImageType() ? 0 : 1;
 
-		auto error = test->GetImageType() == 0 ? abs(100 - score) : abs(score + 100);
+		auto error = test->GetImageType() == 0 ? abs(100 - score) : score;
 
 		// Perform the update
 		result[0] += error; result[1] += counter;
@@ -97,7 +97,7 @@ Solution * LearnWrapper::Create(GeneratorBase * generator, int solutionId)
 	for (auto i = 0; i < pixelCount; i++) dna.push_back(generator->Generate(-1000, 1000));
 
 	// Add the scale factor
-	dna.push_back(1e4);
+	dna.push_back(1e5);
 
 	// Add the offset
 	dna.push_back(0 /*generator->Generate(-1000, 1000)*/ );
