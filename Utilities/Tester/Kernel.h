@@ -22,9 +22,7 @@ namespace NVL_AI
 		Mat _weights;
 	public:
 		Kernel(const string& path);
-
 		double Evaluate(Mat& image);
-
 		inline Mat& GetWeights() { return _weights; }
 	};
 }

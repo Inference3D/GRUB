@@ -1,0 +1,39 @@
+---
+title: "A first date with Cross-correlation"
+date: "`r Sys.Date()`"
+author: WildBoar
+bibliography: article.bib
+csl: ieee.csl
+link-citations: true
+output:
+    rmdformats::readthedown:
+    toc: 2
+    highlight: tango
+    mathjax: default
+    number_sections: false
+    fig_caption: true
+---
+
+## Introduction ##
+
+In 1989, Yann LeCun published a paper [@lecun1989backpropagation] outlining an approach that could leverage backpropagation for optimizing convolutional filters, enabling an algorithm that could perform feature detection in image-based machine learning. Here features refer to a sparse set of small patches of characteristic patterns that be used to summarize an image potentially consisting of millions of data points (using the data points directly tends to _overwhealm_ machine learning algorithms). It took several decades for things to become clearer in the [deep learning](https://en.wikipedia.org/wiki/Deep_learning) space, and the rise of the (GPU)[https://en.wikipedia.org/wiki/Graphics_processing_unit] to establish Convolutional Neural Networks (CNN) as the _go to_ solution for all things machine vision.
+
+Today the hype has moved onto **natural language processing** with [ChatGPT](https://en.wikipedia.org/wiki/ChatGPT) and networks featuring new types of machine learning models (including [transformers](https://en.wikipedia.org/wiki/ChatGPT)), but convolutional systems are still considered very important.
+
+As somebody interested in [computer vision](https://en.wikipedia.org/wiki/Computer_vision), my current goal is to get a better understanding of convolution as an automatic feature extraction tool. For me, the best way to do this is to write some code and see if things behave in the way that I expect them to. I am particularly interested in [Explainable Artificial Intelligence](https://en.wikipedia.org/wiki/Explainable_artificial_intelligence), as much of the traditional theory associated with computer vision is generally considered obsolete in light of the current machine learning innovations. The advantages of having an explainable 
+
+## Literature ##
+
+## Methodology ##
+
+## Experiment ##
+
+## Result ##
+
+## Conclusion ##
+
+## Future Work ##
+
+## References ##
+
+<div id="refs"></div>
