@@ -9,6 +9,7 @@
 #include <iostream>
 using namespace std;
 
+#include <NVLib/Logger.h>
 #include <NVLib/Parameters/Parameters.h>
 
 #include <opencv2/opencv.hpp>
@@ -32,15 +33,17 @@ void Run(NVLib::Parameters * parameters);
 void Run(NVLib::Parameters * parameters) 
 {
     // Verify that we have some input parameters
-    if (parameters == nullptr) return;
+    if (parameters == nullptr) return; auto logger = NVLib::Logger(1);
 
-    // Load the parameters into variables
-    auto inputFolder = NVL_Utils::ArgReader::ReadString(parameters, "input");
-    auto outputFolder = NVL_Utils::ArgReader::ReadString(parameters, "output");
-    auto filename = NVL_Utils::ArgReader::ReadString(parameters, "filename");
-    auto count = NVL_Utils::ArgReader::ReadInteger(parameters, "count");
+    logger.StartApplication();
 
-    cout << "Hello World" << endl;
+    logger.Log(1, "Load the input arguments");
+    auto database = NVL_Utils::ArgReader::ReadString(parameters, "database");
+    auto dataset = NVL_Utils::ArgReader::ReadString(parameters, "dataset");
+
+    
+
+    logger.StopApplication();    
 }
 
 //--------------------------------------------------

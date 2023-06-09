@@ -24,7 +24,7 @@ namespace NVL_App
 	public:
 		PathHelper(const string& database, const string& dataset);
 
-		string GetRawFolder();
+		string GetTestFolder();
 		string GetMetaFolder();
 
 		inline string& GetDatabase() { return _database; }

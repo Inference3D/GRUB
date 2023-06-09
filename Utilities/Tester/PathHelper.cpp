@@ -31,9 +31,9 @@ PathHelper::PathHelper(const string& database, const string& dataset) : _databas
  * @brief Generate the path to the "raw" (images) folder
  * @return string Returns a string
  */
-string PathHelper::GetRawFolder()
+string PathHelper::GetTestFolder()
 {
-	return GetPath("raw");
+	return GetPath("test");
 }
 
 /**

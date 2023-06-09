@@ -42,10 +42,8 @@ namespace NVL_Utils
 
             auto parameters = new NVLib::Parameters();
 
-            parameters->Add("input", parser.get<String>("input"));
-            parameters->Add("output", parser.get<String>("output"));
-            parameters->Add("filename", parser.get<String>("filename"));
-            parameters->Add("count", parser.get<String>("count"));
+            parameters->Add("database", parser.get<String>("database"));
+            parameters->Add("dataset", parser.get<String>("dataset"));
 
             return parameters;
         }        
@@ -114,11 +112,9 @@ namespace NVL_Utils
         inline static string GetParamKeys() 
         {
             const char * keys = 
-                "{ help h usage ? |                       | Show help message                            }"
-                "{ input          | Input                 | The folder containing the input files        }"
-                "{ output         | Output                | The folder containing the output files       }"
-                "{ filename       | card                  | Image template name --> [@fileName]_<id>.png }"
-                "{ count          | 3                     | The location of the output folder            }"; 
+                "{ help h usage ? |                       | Show help message                              }"
+                "{ database       | /home/trevor/MLData   | The location of the database                   }"
+                "{ dataset        | hand_0000             | The database that we are dealing with          }";
 
             return string(keys);
         }

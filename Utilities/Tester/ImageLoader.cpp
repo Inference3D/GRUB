@@ -20,7 +20,7 @@ using namespace NVL_App;
  */
 ImageLoader::ImageLoader(PathHelper& pathHelper, const string& lookupName) : _position(0)
 {
-	_paths = GetFiles(pathHelper.GetRawFolder());
+	_paths = GetFiles(pathHelper.GetTestFolder());
 	_classes = LoadLookup(pathHelper.GetMetaFolder(), lookupName);
 }
 
