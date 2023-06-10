@@ -45,6 +45,15 @@ string PathHelper::GetMetaFolder()
 	return GetPath("meta");
 }
 
+/**
+ * @brief The get the model folder that we are dealing 
+ * @return string Returns a  
+ */
+string PathHelper::GetModelFolder() 
+{
+	return GetPath("model");
+}
+
 //--------------------------------------------------
 // Helpers
 //--------------------------------------------------

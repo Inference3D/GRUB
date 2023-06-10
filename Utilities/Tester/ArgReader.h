@@ -44,6 +44,7 @@ namespace NVL_Utils
 
             parameters->Add("database", parser.get<String>("database"));
             parameters->Add("dataset", parser.get<String>("dataset"));
+            parameters->Add("model", parser.get<String>("model"));
 
             return parameters;
         }        
@@ -114,7 +115,8 @@ namespace NVL_Utils
             const char * keys = 
                 "{ help h usage ? |                       | Show help message                              }"
                 "{ database       | /home/trevor/MLData   | The location of the database                   }"
-                "{ dataset        | hand_0000             | The database that we are dealing with          }";
+                "{ dataset        | hand_0000             | The database that we are dealing with          }"
+                "{ model          | hand.tiff             | The hand that we are dealing with              }";
 
             return string(keys);
         }

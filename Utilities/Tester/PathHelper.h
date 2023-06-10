@@ -26,6 +26,7 @@ namespace NVL_App
 
 		string GetTestFolder();
 		string GetMetaFolder();
+		string GetModelFolder();
 
 		inline string& GetDatabase() { return _database; }
 		inline string& GetDataset() { return _dataset; }
