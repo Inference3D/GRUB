@@ -71,6 +71,11 @@ void Engine::Run()
     _logger->Log(1, "Generating initial solutions");
     _learner->Initialize();
 
+    _logger->Log(1, "Creating a graph series");
+    auto series = NVLib::GraphSeries("Learner", Vec3i(0,0,255), vector<Point2d>());
+    auto graph = NVLib::Graph("GLearner", "Score", "Epoch");
+    graph.AddSeries(series);
+
     _logger->StartFunction("Solution Refinement");
     for (auto i = 0; i < _learningArguments->GetMaxIterations(); i++) 
     {
@@ -79,6 +84,10 @@ void Engine::Run()
         _logger->Log(1, "Evaluating Solutions");
         auto bestSolution = _learner->EvaluateSolutions();
         _logger->Log(1, "Best Score: %f", bestSolution->GetError());
+
+        _logger->Log(1, "Writing graph");
+        graph.GetSeries()[0].GetValues().push_back(Point2d(i, bestSolution->GetError()));
+        Mat graphImage = graph.Render(Size(1000,1000)); imwrite("graph.png", graphImage);
 
         if (bestSolution->GetError() == 0) 
         {
