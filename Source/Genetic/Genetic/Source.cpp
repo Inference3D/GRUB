@@ -14,8 +14,8 @@
 
 /**
  * Main Method
- * @param argc The count of the incomming arguments
- * @param argv The number of incomming arguments
+ * @param argc The count of the incoming arguments
+ * @param argv The number of incoming arguments
  */
 int main(int argc, char ** argv) 
 {
